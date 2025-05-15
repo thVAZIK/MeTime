@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp">
+    <TextView
+        android:id="@+id/MeTimeSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MeTime"
+        android:textSize="19sp"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/arrow_left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/BackBtn"
+        />
+
+    <TextView
+        android:id="@+id/LogInSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter code"
+        android:fontFamily="@font/raleway_bold"
+        android:textSize="32sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MeTimeSign"
+        android:layout_marginTop="70dp"/>
+
+    <TextView
+        android:id="@+id/WeveSentSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We've sent an Email message with an activation code to your email"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/LogInSign"
+        android:fontFamily="@font/raleway_medium"
+        android:textSize="16sp"
+        android:textColor="#7A7A7A"/>
+    <TextView
+        android:id="@+id/emailAddressTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="example@example.com"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/WeveSentSign"
+        android:fontFamily="@font/raleway_medium"
+        android:textSize="16sp"
+        android:textColor="@color/black"/>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/emailAddressTV">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/_1btnLT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            android:hint="\n"
+            app:layout_constraintTop_toBottomOf="@id/FullNameSign"
+            app:boxStrokeColor="@color/primary"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:textAlignment="center"
+                android:maxLength="1"
+                android:id="@+id/_1btnET"
+                android:fontFamily="@font/raleway_semibold"
+                android:layout_width="51dp"
+                android:layout_height="65dp"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColorHint="@color/grayHint" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/_2btnLT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            android:hint="\n"
+            app:layout_constraintTop_toBottomOf="@id/FullNameSign"
+            app:boxStrokeColor="@color/primary"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:textAlignment="center"
+                android:maxLength="1"
+                android:id="@+id/_2btnET"
+                android:fontFamily="@font/raleway_semibold"
+                android:layout_width="51dp"
+                android:layout_height="65dp"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColorHint="@color/grayHint" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/_3btnLT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            android:hint="\n"
+            app:layout_constraintTop_toBottomOf="@id/FullNameSign"
+            app:boxStrokeColor="@color/primary"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:textAlignment="center"
+                android:maxLength="1"
+                android:id="@+id/_3btnET"
+                android:fontFamily="@font/raleway_semibold"
+                android:layout_width="51dp"
+                android:layout_height="65dp"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColorHint="@color/grayHint" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/_4btnLT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            android:hint="\n"
+            app:layout_constraintTop_toBottomOf="@id/FullNameSign"
+            app:boxStrokeColor="@color/primary"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:textAlignment="center"
+                android:maxLength="1"
+                android:id="@+id/_4btnET"
+                android:fontFamily="@font/raleway_semibold"
+                android:layout_width="51dp"
+                android:layout_height="65dp"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColorHint="@color/grayHint" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/_5btnLT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            android:hint="\n"
+            app:layout_constraintTop_toBottomOf="@id/FullNameSign"
+            app:boxStrokeColor="@color/primary"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:textAlignment="center"
+                android:maxLength="1"
+                android:id="@+id/_5btnET"
+                android:fontFamily="@font/raleway_semibold"
+                android:layout_width="51dp"
+                android:layout_height="65dp"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColorHint="@color/grayHint" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/_6btnLT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            android:hint="\n"
+            app:layout_constraintTop_toBottomOf="@id/FullNameSign"
+            app:boxStrokeColor="@color/primary"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:textAlignment="center"
+                android:maxLength="1"
+                android:id="@+id/_6btnET"
+                android:fontFamily="@font/raleway_semibold"
+                android:layout_width="51dp"
+                android:layout_height="65dp"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColorHint="@color/grayHint" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginLeft="-30dp"
+        android:id="@+id/sendCodeAgainTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send code again"
+        android:textColor="#7A7A7A"
+        android:textSize="16sp"
+        android:fontFamily="@font/raleway_semibold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/timerSendAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="00:20"
+        android:textColor="#7A7A7A"
+        android:textSize="16sp"
+        android:fontFamily="@font/raleway_semibold"
+        app:layout_constraintStart_toEndOf="@id/sendCodeAgainTV"
+        app:layout_constraintBottom_toBottomOf="@id/sendCodeAgainTV"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
