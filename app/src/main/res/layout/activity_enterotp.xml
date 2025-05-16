@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@id/LogInSign"
         android:fontFamily="@font/raleway_medium"
         android:textSize="16sp"
-        android:textColor="#7A7A7A"/>
+        android:textColor="@color/gray2"/>
     <TextView
         android:id="@+id/emailAddressTV"
         android:layout_width="wrap_content"
@@ -228,7 +228,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send code again"
-        android:textColor="#7A7A7A"
+        android:textColor="@color/gray2"
         android:textSize="16sp"
         android:fontFamily="@font/raleway_semibold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -242,7 +242,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00:20"
-        android:textColor="#7A7A7A"
+        android:textColor="@color/gray2"
         android:textSize="16sp"
         android:fontFamily="@font/raleway_semibold"
         app:layout_constraintStart_toEndOf="@id/sendCodeAgainTV"

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MeTime</string>
     <string name="log_out"><u>Log out</u></string>
+    <string name="follow_the_steps_to_schedule_your_nex_appointment_with_us">Follow the steps to schedule your nex appointment with us.</string>
 </resources>
