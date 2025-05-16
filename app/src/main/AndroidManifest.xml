@@ -26,6 +26,9 @@
         <activity android:name=".EnterOTPActivity" android:exported="false"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".SetupPINActivity" android:exported="false"/>
+        <activity android:name=".OnBoardingEnterActivity" android:exported="false"/>
+        <activity android:name=".EnterPINActivity" android:exported="false"/>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="70dp"
+    android:paddingBottom="70dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Hey there!"
+        android:fontFamily="@font/montserrat_bold"
+        android:textSize="32sp"
+        android:textColor="@color/black"
+        android:id="@+id/HeyThereSign"/>
+
+    <TextView
+        android:id="@+id/beforeschedule"
+        android:layout_width="293dp"
+        android:layout_height="wrap_content"
+        android:text="@string/before_schedule_please_enter_your_account_or_create_one"
+        android:fontFamily="@font/raleway_medium"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/HeyThereSign"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/CreateAccountBtn"
+        android:layout_width="271dp"
+        android:layout_height="71dp"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:textColor="@color/primary"
+        android:text="Create Account"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/LogInBtn"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/LogInBtn"
+        android:layout_width="271dp"
+        android:layout_height="71dp"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/white"
+        android:text="Log In"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/beforeschedule"
+        android:layout_marginTop="37dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

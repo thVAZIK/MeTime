@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp">
+
+    <TextView
+        android:id="@+id/MeTimeSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_bold"
+        android:text="Editing Profile"
+        android:textSize="19sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/BackBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/arrow_left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/AvatarCV"
+        android:layout_width="147dp"
+        android:layout_height="147dp"
+        android:layout_marginTop="18dp"
+        app:cardCornerRadius="90dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MeTimeSign">
+
+        <ImageView
+            android:id="@+id/UserAvatarIV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_avatar" />
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/editAvatarFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="-5dp"
+        android:layout_marginBottom="-10dp"
+        android:backgroundTint="@color/primary"
+        android:src="@drawable/edit_icon"
+        android:tint="@color/black"
+        app:fabCustomSize="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/AvatarCV"
+        app:layout_constraintRight_toRightOf="@id/AvatarCV" />
+
+    <LinearLayout
+        android:id="@+id/FullNameLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AvatarCV">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="26dp">
+
+            <TextView
+                android:id="@+id/FirstNameSign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="First Name"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/FirstNameTL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="\n"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/primary">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/FirstNameET"
+                    android:layout_width="140dp"
+                    android:layout_height="54dp"
+                    android:fontFamily="@font/raleway_semibold"
+                    android:hint="Carol"
+                    android:inputType="textEmailAddress"
+                    android:padding="12dp"
+                    android:textColorHint="@color/grayHint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/LastNameSign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Last Name"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/LogInSign" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/LastNameTI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="\n"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/primary"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/EmailSign">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/LastNameET"
+                    android:layout_width="149dp"
+                    android:layout_height="54dp"
+                    android:fontFamily="@font/raleway_semibold"
+                    android:hint="Marwlore"
+                    android:inputType="textEmailAddress"
+                    android:padding="12dp"
+                    android:textColorHint="@color/grayHint" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:textColor="@color/black"
+        android:layout_marginTop="5dp"
+        android:id="@+id/EmailSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:fontFamily="@font/raleway_medium"
+        app:layout_constraintTop_toBottomOf="@id/FullNameLL"
+        app:layout_constraintStart_toStartOf="@id/EmailIL"
+        android:textSize="16sp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/EmailIL"
+        android:layout_width="315dp"
+        android:layout_height="wrap_content"
+        app:boxCornerRadiusTopStart="10dp"
+        app:boxCornerRadiusBottomEnd="10dp"
+        app:boxCornerRadiusBottomStart="10dp"
+        app:boxCornerRadiusTopEnd="10dp"
+        android:hint="\n"
+        app:layout_constraintTop_toBottomOf="@id/EmailSign"
+        app:boxStrokeColor="@color/primary"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/EmailET"
+            android:fontFamily="@font/raleway_semibold"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:hint="example@example.com"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:textColorHint="@color/grayHint" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/CancelBtn"
+        android:layout_width="271dp"
+        android:layout_height="41dp"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:textColor="@color/primary"
+        android:text="Cancel"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/SaveChangesBtn"
+        android:layout_width="271dp"
+        android:layout_height="45dp"
+        android:paddingTop="0dp"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/white"
+        android:text="Save changes"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/CancelBtn"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
