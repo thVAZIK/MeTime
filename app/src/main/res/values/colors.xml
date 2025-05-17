@@ -8,4 +8,6 @@
     <color name="gray2">#7A7A7A</color>
     <color name="gray3">#3F3F3F</color>
     <color name="warning">#ED7354</color>
+    <color name="almost_white_gray">#EFEFEF</color>
+    <color name="gray4">#CDCDCD</color>
 </resources>

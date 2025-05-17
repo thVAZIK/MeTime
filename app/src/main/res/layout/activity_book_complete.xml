@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp">
+
+    <ImageView
+        android:id="@+id/HeartIV"
+        android:layout_width="114dp"
+        android:layout_height="114dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="95dp"
+        android:src="@drawable/pink_icon_with_heart"/>
+    <TextView
+        android:id="@+id/ThankYouSign"
+        android:layout_width="281dp"
+        android:layout_height="wrap_content"
+        android:text="@string/thank_you_for_booking_with_metime"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/HeartIV"
+        android:layout_marginTop="72dp"/>
+
+    <TextView
+        android:id="@+id/BookingDetailsSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your booking details:"
+        android:fontFamily="@font/raleway_medium"
+        android:textSize="18sp"
+        android:textColor="@color/gray2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ThankYouSign"
+        android:layout_marginTop="73dp"/>
+
+    <LinearLayout
+        android:id="@+id/DateAndTimeLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BookingDetailsSign"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tuesday, 19"
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/gray3"
+            android:textSize="18sp"
+            android:layout_marginRight="15dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="04:30pm"
+            android:fontFamily="@font/raleway_medium"
+            android:textColor="@color/gray3"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/SalonNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="At The Gallery Salon"
+        android:fontFamily="@font/raleway_medium"
+        android:textSize="18sp"
+        android:textColor="@color/gray2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/DateAndTimeLL"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8502 Preston Rd. Inglewood"
+        android:fontFamily="@font/raleway_semibold"
+        android:textColor="@color/gray3"
+        android:textSize="18sp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SalonNameTV"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="15dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/KeepBookBtn"
+        android:layout_width="291dp"
+        android:layout_height="71dp"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/white"
+        android:text="Keep booking"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50dp"/>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/MainPageBtn"
+        android:layout_width="291dp"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:textColor="@color/primary"
+        android:text="Main page"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/KeepBookBtn"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

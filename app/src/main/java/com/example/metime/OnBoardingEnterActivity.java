@@ -31,7 +31,7 @@ public class OnBoardingEnterActivity extends AppCompatActivity {
         SkipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BeforeScheduleFragment fragment = new BeforeScheduleFragment(getApplicationContext());
+                BeforeScheduleFragment fragment = new BeforeScheduleFragment();
                 fragment.show(getSupportFragmentManager(), "BannerFragment");
             }
         });

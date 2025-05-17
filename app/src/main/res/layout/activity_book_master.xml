@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp">
+
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/arrow_left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/BackBtn"
+        />
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/MasterAvatarCV"
+        android:layout_width="98dp"
+        android:layout_height="98dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="30dp">
+        <ImageView
+            android:id="@+id/MasterAvatarIV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_avatar"/>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/MasterFullNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anna Smith"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MasterAvatarCV"/>
+
+    <TextView
+        android:id="@+id/MasterSpecializationTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nail Designer"
+        android:fontFamily="@font/raleway_medium"
+        android:textSize="14sp"
+        android:textColor="@color/gray2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MasterFullNameTV"/>
+    
+    <LinearLayout
+        android:id="@+id/MasterRatingLL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MasterSpecializationTV"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/star"
+            android:layout_marginRight="3dp"/>
+        <TextView
+            android:id="@+id/MasterRatingTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.0"
+            android:fontFamily="@font/raleway_medium"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="-2dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/MasterReviewsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MasterRatingLL"
+        android:text="See all reviews"
+        android:fontFamily="@font/raleway_bold"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"/>
+    
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MasterReviewsBtn"
+        android:layout_marginTop="20dp"
+        app:dividerColor="@color/almost_white_gray"/>
+
+    <TextView
+        android:id="@+id/SelectSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider1"
+        android:text="@string/select_date_amp_time"
+        android:layout_marginTop="23dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:id="@+id/DaySign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SelectSign"
+        android:text="Day"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="18sp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:id="@+id/MonthSelectBtn"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SelectSign">
+        <TextView
+            android:id="@+id/MonthSelectTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="October"
+            android:textColor="@color/gray2"
+            android:fontFamily="@font/raleway_medium"
+            android:textSize="16sp" />
+        <ImageView
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="3dp"
+            android:src="@drawable/arrow_right"
+            android:layout_width="14dp"
+            android:layout_height="14dp"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/DayListRV"
+        android:layout_marginTop="23dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/DaySign"
+        tools:listitem="@layout/item_day_in_month" />
+
+    <TextView
+        android:id="@+id/AvailabilitySign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/DayListRV"
+        android:text="Availability"
+        android:layout_marginTop="23dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="18sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/TimeListRV"
+        android:layout_marginTop="23dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:itemCount="6"
+        app:spanCount="2"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AvailabilitySign"
+        tools:listitem="@layout/item_time" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/BookBtn"
+        android:layout_width="291dp"
+        android:layout_height="71dp"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/white"
+        android:text="Book"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

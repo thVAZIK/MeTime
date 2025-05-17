@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp">
+
+    <TextView
+        android:id="@+id/MeTimeSign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Booking"
+        android:textSize="19sp"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/arrow_left"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/BackBtn"
+        />
+
+    <TextView
+        android:id="@+id/SelectADateSign"
+        android:layout_width="295dp"
+        android:layout_height="wrap_content"
+        android:text="@string/select_a_date_to_see_the_next_slot_available_for_you"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/MeTimeSign"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="24sp"
+        android:textColor="@color/gray3"
+        android:layout_marginTop="46dp"/>
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SelectADateSign"
+        android:layout_marginTop="20dp"
+        app:dividerColor="@color/almost_white_gray"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:id="@+id/MonthAndYearSelectBtn"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider1">
+        <TextView
+            android:id="@+id/MonthSelectTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="October"
+            android:textColor="@color/gray2"
+            android:fontFamily="@font/raleway_medium"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/YearSelectTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 2023"
+            android:textColor="@color/primary"
+            android:fontFamily="@font/raleway_medium"
+            android:textSize="24sp" />
+        <ImageView
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="3dp"
+            android:src="@drawable/arrow_right"
+            android:layout_width="14dp"
+            android:layout_height="14dp"/>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/DaySign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MonthAndYearSelectBtn"
+        android:text="Day"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="18sp"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/DayListRV"
+        android:layout_marginTop="23dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/DaySign"
+        tools:listitem="@layout/item_day_in_month" />
+
+    <TextView
+        android:id="@+id/AvailabilitySign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/DayListRV"
+        android:text="Availability"
+        android:layout_marginTop="23dp"
+        android:fontFamily="@font/raleway_semibold"
+        android:textSize="18sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/TimeListRV"
+        android:layout_marginTop="23dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:itemCount="6"
+        app:spanCount="2"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AvailabilitySign"
+        tools:listitem="@layout/item_time_with_master" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/BookBtn"
+        android:layout_width="291dp"
+        android:layout_height="71dp"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/white"
+        android:text="Book"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

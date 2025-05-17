@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingRight="12dp">
+    <Button
+        android:layout_width="63dp"
+        android:layout_height="72dp"
+        android:background="@drawable/button_border_selector"
+        android:text="03 Wed"
+        android:fontFamily="@font/raleway_semibold"
+        android:padding="10dp"
+        android:textColor="@color/text_color_selector" />
+</LinearLayout>

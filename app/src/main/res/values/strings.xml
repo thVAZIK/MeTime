@@ -4,4 +4,7 @@
     <string name="follow_the_steps_to_schedule_your_nex_appointment_with_us">Follow the steps to schedule your nex appointment with us.</string>
     <string name="i_don_t_have_a_preference"><u>I don\'t have a preference</u></string>
     <string name="before_schedule_please_enter_your_account_or_create_one">Before schedule, please enter your account or create one!</string>
+    <string name="select_date_amp_time"><![CDATA[Select date & time]]></string>
+    <string name="select_a_date_to_see_the_next_slot_available_for_you">Select a date to see the <font color="#FDCCC5">next</font> slot available for you</string>
+    <string name="thank_you_for_booking_with_metime">Thank you for booking with <font face="raleway_bold" color="#FF000000">MeTime</font></string>
 </resources>

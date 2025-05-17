@@ -14,10 +14,8 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class BeforeScheduleFragment extends BottomSheetDialogFragment {
-    private Context context;
 
-    public BeforeScheduleFragment(Context context) {
-        this.context = context;
+    public BeforeScheduleFragment() {
     }
 
     @Nullable
@@ -27,13 +25,15 @@ public class BeforeScheduleFragment extends BottomSheetDialogFragment {
 
         Button LoginBtn = view.findViewById(R.id.LogInBtn);
         LoginBtn.setOnClickListener(v -> {
-            startActivity(new Intent(context, LoginActivity.class));
+            startActivity(new Intent(getContext(), LoginActivity.class));
+            getActivity().finish();
             dismiss();
         });
 
         Button CreateAccountBtn = view.findViewById(R.id.CreateAccountBtn);
         CreateAccountBtn.setOnClickListener(v -> {
-            startActivity(new Intent(context, SignUpActivity.class));
+            startActivity(new Intent(getContext(), SignUpActivity.class));
+            getActivity().finish();
             dismiss();
         });
 
