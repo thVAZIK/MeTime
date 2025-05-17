@@ -6,5 +6,5 @@ This application, **MeTime**, is being developed as part of a college practicum.
 - [ ] Develop all application windows (UI)
 - [ ] Implement core functionality
 - [ ] Add user authentication and profile management
-- [ ] Ensure database integration
-- [ ] Establish backend and frontend communication
+- [ ] Finding and fixing bugs
+- [ ] Final refactoring
