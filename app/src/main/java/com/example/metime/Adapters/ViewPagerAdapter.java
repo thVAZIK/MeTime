@@ -7,16 +7,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.metime.Models.Appointment;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.ViewHolder> {
 
-    private final List<List<String>> dataSets = new ArrayList<>();
+    private final List<List<Appointment>> dataSets = new ArrayList<>();
 
     public ViewPagerAdapter() {
+        // TODO
         dataSets.add(new ArrayList<>()); // Past
         dataSets.add(new ArrayList<>()); // Upcoming
+        // TODO
     }
 
     @NonNull
@@ -43,7 +47,7 @@ public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.View
     }
 
 
-    public void updateData(int tabIndex, List<String> newData) {
+    public void updateData(int tabIndex, List<Appointment> newData) {
         dataSets.set(tabIndex, newData);
         notifyDataSetChanged();
     }

@@ -1,6 +1,5 @@
-package com.example.metime;
+package com.example.metime.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +10,9 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.metime.LoginActivity;
+import com.example.metime.R;
+import com.example.metime.SignUpActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class BeforeScheduleFragment extends BottomSheetDialogFragment {

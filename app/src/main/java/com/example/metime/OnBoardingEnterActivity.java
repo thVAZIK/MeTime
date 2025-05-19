@@ -10,6 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.metime.Fragments.BeforeScheduleFragment;
+
 public class OnBoardingEnterActivity extends AppCompatActivity {
     Button SkipBtn;
     private void init() {

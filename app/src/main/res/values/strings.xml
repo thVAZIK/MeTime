@@ -7,4 +7,5 @@
     <string name="select_date_amp_time"><![CDATA[Select date & time]]></string>
     <string name="select_a_date_to_see_the_next_slot_available_for_you">Select a date to see the <font color="#FDCCC5">next</font> slot available for you</string>
     <string name="thank_you_for_booking_with_metime">Thank you for booking with <font face="raleway_bold" color="#FF000000">MeTime</font></string>
+    <string name="are_you_sure_you_want_to_cancel_this_appointment">Are you sure, you want to <font color="#ED7354">cancel</font> this appointment?</string>
 </resources>

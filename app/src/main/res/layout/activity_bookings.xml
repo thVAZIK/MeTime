@@ -45,7 +45,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:tabMode="fixed"
         app:tabGravity="fill"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="34dp"
+        app:tabIndicatorColor="@color/primary"
+        app:tabSelectedTextColor="@color/primary"
+        app:tabTextColor="@color/black"
+        app:tabIndicatorFullWidth="true"
+        app:tabBackground="@android:color/transparent"
+        android:background="@android:color/transparent" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
