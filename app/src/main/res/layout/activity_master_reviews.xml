@@ -10,7 +10,7 @@
         android:id="@+id/MeTimeSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MeTime"
+        android:text="Reviews"
         android:textSize="19sp"
         android:fontFamily="@font/raleway_bold"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -26,55 +26,55 @@
         android:id="@+id/BackBtn"
         />
 
-    <ImageView
-        android:id="@+id/state"
-        android:layout_width="110dp"
-        android:layout_height="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/MeTimeSign"
-        android:src="@drawable/state_3"
-        android:layout_marginTop="52dp"/>
-
     <TextView
-        android:id="@+id/chooseService"
-        android:layout_width="234dp"
+        android:id="@+id/ReviewsSign"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/state"
-        android:text="Choose a professional, see the slots available"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:fontFamily="@font/raleway_semibold"
-        android:layout_marginTop="39dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        tools:listitem="@layout/item_professional"
-        tools:itemCount="3"
-        android:layout_marginTop="39dp"
-        android:id="@+id/ServicesList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chooseService"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/SkipBtn"
-        android:layout_width="match_parent"
-        android:layout_height="71dp"
-        android:layout_marginRight="15dp"
-        android:textSize="18sp"
-        app:cornerRadius="10dp"
-        android:backgroundTint="@android:color/transparent"
-        android:textColor="@color/primary"
-        android:text="@string/i_don_t_have_a_preference"
+        android:text="Customer reviews for master"
         android:fontFamily="@font/raleway_bold"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="30dp"/>
+        app:layout_constraintTop_toBottomOf="@id/MeTimeSign"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="29dp"/>
 
+    <TextView
+        android:id="@+id/MasterFullNameTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Anna Smith"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ReviewsSign"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintHeight_max="650dp"
+        tools:listitem="@layout/item_review"
+        android:id="@+id/ReviewsRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MasterFullNameTV"
+        android:layout_marginTop="14dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/WriteReviewBtn"
+        android:layout_width="271dp"
+        android:layout_height="61dp"
+        android:paddingTop="0dp"
+        android:textSize="16sp"
+        app:cornerRadius="10dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/gray4"
+        android:backgroundTint="@android:color/transparent"
+        android:textColor="#3E3E3E"
+        android:text="Write a review"
+        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

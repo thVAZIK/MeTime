@@ -100,7 +100,7 @@
                     android:layout_height="54dp"
                     android:fontFamily="@font/raleway_semibold"
                     android:hint="Carol"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:padding="12dp"
                     android:textColorHint="@color/grayHint" />
 
@@ -142,7 +142,7 @@
                     android:layout_height="54dp"
                     android:fontFamily="@font/raleway_semibold"
                     android:hint="Marwlore"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:padding="12dp"
                     android:textColorHint="@color/grayHint" />
 

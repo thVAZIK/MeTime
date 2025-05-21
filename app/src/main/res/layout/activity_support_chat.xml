@@ -53,7 +53,7 @@
                 android:textSize="14sp"
                 android:fontFamily="@font/raleway_semibold"
                 android:hint="Write message here..."
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:padding="12dp"
                 android:textColorHint="@color/grayHint" />
 

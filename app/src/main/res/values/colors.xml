@@ -10,4 +10,5 @@
     <color name="warning">#ED7354</color>
     <color name="almost_white_gray">#EFEFEF</color>
     <color name="gray4">#CDCDCD</color>
+    <color name="nav_menu_selected">#8274FF</color>
 </resources>

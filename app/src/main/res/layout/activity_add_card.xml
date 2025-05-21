@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:hint="Type cardholder full name"
-            android:inputType="textEmailAddress"
+            android:inputType="text"
             android:padding="12dp"
             android:textColorHint="@color/grayHint" />
 
@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:hint="Type your card number"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
             android:padding="12dp"
             android:textColorHint="@color/grayHint" />
 
@@ -155,7 +155,7 @@
                     android:layout_height="54dp"
                     android:fontFamily="@font/raleway_semibold"
                     android:hint="MM/YY"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:padding="12dp"
                     android:textColorHint="@color/grayHint" />
 
@@ -198,7 +198,7 @@
                     android:layout_height="54dp"
                     android:fontFamily="@font/raleway_semibold"
                     android:hint="CVV code"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     android:padding="12dp"
                     android:textColorHint="@color/grayHint" />
 
