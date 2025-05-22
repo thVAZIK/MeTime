@@ -6,9 +6,11 @@
     android:layout_marginTop="3dp"
     android:layout_marginLeft="3dp"
     android:layout_marginRight="3dp"
-    android:layout_marginBottom="15dp">
+    android:layout_marginBottom="15dp"
+    android:id="@+id/main">
     <androidx.cardview.widget.CardView
         android:id="@+id/ImageCV"
+        android:layout_margin="3dp"
         android:layout_width="72dp"
         android:layout_height="72dp"
         app:cardCornerRadius="5dp"

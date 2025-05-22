@@ -50,6 +50,7 @@
         android:layout_marginTop="39dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_professional"
         tools:itemCount="3"
         android:layout_marginTop="39dp"

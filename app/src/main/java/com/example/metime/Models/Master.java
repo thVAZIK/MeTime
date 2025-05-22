@@ -1,6 +1,9 @@
 package com.example.metime.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
+import java.util.List;
 
 public class Master {
     private int salon_id;
@@ -10,7 +13,28 @@ public class Master {
     private String first_name;
     private String image_link;
     private Date updated_at;
-    private int specialization;
+    private int specialization_id;
+    @SerializedName("Specializations")
+    private Specializations specialization;
+
+    @SerializedName("Master_Ratings_Summary")
+    private List<MasterRatingsSummary> masterRatingsSummaries;
+
+    public List<MasterRatingsSummary> getMasterRatingsSummaries() {
+        return masterRatingsSummaries;
+    }
+
+    public void setMasterRatingsSummaries(List<MasterRatingsSummary> masterRatingsSummaries) {
+        this.masterRatingsSummaries = masterRatingsSummaries;
+    }
+
+    public Specializations getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(Specializations specialization) {
+        this.specialization = specialization;
+    }
 
     public int getSalon_id() {
         return salon_id;
@@ -68,11 +92,11 @@ public class Master {
         this.updated_at = updated_at;
     }
 
-    public int getSpecialization() {
-        return specialization;
+    public int getSpecialization_id() {
+        return specialization_id;
     }
 
-    public void setSpecialization(int specialization) {
-        this.specialization = specialization;
+    public void setSpecialization_id(int specialization_id) {
+        this.specialization_id = specialization_id;
     }
 }

@@ -32,6 +32,9 @@
         <activity android:name=".CheckoutActivity" android:exported="false"/>
         <activity android:name=".SearchActivity" android:exported="false"/>
         <activity android:name=".MainPageActivity" android:exported="false"/>
+        <activity android:name=".OnBoardingChooseCategoryServiceActivity" android:exported="false"/>
+        <activity android:name=".OnBoardingChooseFitActivity" android:exported="false"/>
+        <activity android:name=".OnBoardingChooseProfessional" android:exported="false"/>
 
         <meta-data
             android:name="preloaded_fonts"

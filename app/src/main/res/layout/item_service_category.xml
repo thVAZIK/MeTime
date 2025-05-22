@@ -6,9 +6,11 @@
     android:background="@android:color/transparent"
     android:layout_marginRight="22dp"
     android:layout_marginLeft="22dp"
-    android:layout_marginBottom="26dp">
+    android:layout_marginBottom="26dp"
+    android:id="@+id/main">
 
     <androidx.cardview.widget.CardView
+        android:layout_margin="3dp"
         android:id="@+id/ImageCV"
         android:layout_width="125dp"
         android:layout_height="125dp"
@@ -17,8 +19,8 @@
         app:layout_constraintTop_toTopOf="parent">
         <ImageView
             android:id="@+id/ImageIV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:scaleType="centerCrop"
             android:src="@drawable/placeholder_banner"/>
     </androidx.cardview.widget.CardView>
