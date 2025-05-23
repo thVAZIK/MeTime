@@ -11,6 +11,10 @@ public class ProfileUpdate {
         this.email = email;
     }
 
+    public ProfileUpdate(String username) {
+        this.username = username;
+    }
+
     public String getEmail() {
         return email;
     }

@@ -27,15 +27,23 @@ public class BeforeScheduleFragment extends BottomSheetDialogFragment {
 
         Button LoginBtn = view.findViewById(R.id.LogInBtn);
         LoginBtn.setOnClickListener(v -> {
-            startActivity(new Intent(getContext(), LoginActivity.class));
-            getActivity().finish();
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            intent.putExtra("completeOnboarding", true);
+            startActivity(intent);
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
             dismiss();
         });
 
         Button CreateAccountBtn = view.findViewById(R.id.CreateAccountBtn);
         CreateAccountBtn.setOnClickListener(v -> {
-            startActivity(new Intent(getContext(), SignUpActivity.class));
-            getActivity().finish();
+            Intent intent = new Intent(getContext(), SignUpActivity.class);
+            intent.putExtra("completeOnboarding", true);
+            startActivity(intent);
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
             dismiss();
         });
 

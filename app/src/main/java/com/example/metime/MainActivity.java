@@ -1,6 +1,7 @@
 package com.example.metime;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,6 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String PREFS_NAME = "MeTimePrefs";
+    private static final String KEY_FIRST_LAUNCH = "isFirstLaunch";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +27,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean isFirstLaunch = prefs.getBoolean(KEY_FIRST_LAUNCH, true);
+
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(getApplicationContext(), OnBoardingEnterActivity.class);
+            Intent intent;
+            if (isFirstLaunch) {
+                intent = new Intent(getApplicationContext(), OnBoardingEnterActivity.class);
+            } else {
+                intent = new Intent(getApplicationContext(), LoginActivity.class);
+            }
             startActivity(intent);
             finish();
         }, 3000);

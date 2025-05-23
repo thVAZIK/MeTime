@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.metime.Models.LoginRequest;
 import com.example.metime.Models.ProfileUpdate;
+import com.example.metime.Models.VerifyRequest;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -221,6 +222,35 @@ public class ApiClient {
                 .url(DOMAIN_NAME + REST_PATH + "Masters?select=*,Specializations(*),Master_Ratings_Summary(*)")
                 .addHeader("apikey", API_KEY)
                 .addHeader("Authorization", DataBinding.getBearerToken())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseBody = response.body().string();
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onFailure(new IOException("Server error: " + response));
+                }
+            }
+        });
+    }
+
+    public void verifyUser(String email, String token, final SBC_Callback callback) {
+        MediaType mediaType = MediaType.parse("application/json");
+        Gson gson = new Gson();
+        String json = gson.toJson(new VerifyRequest(email, token, "signup"));
+        RequestBody body = RequestBody.create(json, mediaType);
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + AUTH_PATH + "verify")
+                .method("POST", body)
+                .addHeader("apikey", API_KEY)
+                .addHeader("Content-Type", "application/json")
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override

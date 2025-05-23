@@ -71,7 +71,7 @@ public class OnBoardingChooseProfessional extends AppCompatActivity {
                     Type type = new TypeToken<List<Master>>() {
                     }.getType();
                     masters = gson.fromJson(responseBody, type);
-                    ServicesList.setAdapter(new ChooseMastersAdapter(masters, OnBoardingChooseProfessional.this));
+                    ServicesList.setAdapter(new ChooseMastersAdapter(masters, OnBoardingChooseProfessional.this, getSupportFragmentManager()));
                 });
             }
         });

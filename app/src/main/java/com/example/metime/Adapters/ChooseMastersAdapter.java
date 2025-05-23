@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -23,10 +24,12 @@ import java.util.List;
 public class ChooseMastersAdapter extends RecyclerView.Adapter<ChooseMastersAdapter.ViewHolder> {
     private List<Master> items;
     private Context context;
+    private FragmentManager fragmentManager;
 
-    public ChooseMastersAdapter(List<Master> items, Context context) {
+    public ChooseMastersAdapter(List<Master> items, Context context, FragmentManager fragmentManager) {
         this.items = items;
         this.context = context;
+        this.fragmentManager = fragmentManager;
     }
 
     @NonNull
@@ -50,8 +53,8 @@ public class ChooseMastersAdapter extends RecyclerView.Adapter<ChooseMastersAdap
         holder.main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                BeforeScheduleFragment fragment = new BeforeScheduleFragment();
-//                fragment.show(, "BannerFragment");
+                BeforeScheduleFragment fragment = new BeforeScheduleFragment();
+                fragment.show(fragmentManager, "BannerFragment");
             }
         });
     }
