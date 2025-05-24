@@ -18,6 +18,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.metime.Models.Profile;
 import com.example.metime.R;
 import com.example.metime.Tools.ApiClient;
@@ -222,6 +224,7 @@ public class SidePanelDialogFragment extends DialogFragment {
                         Glide.with(requireContext())
                                 .load(url + profile.getAvatar_url())
                                 .placeholder(R.drawable.placeholder_avatar)
+                                .signature(new ObjectKey(String.valueOf(System.currentTimeMillis())))
                                 .error(R.drawable.placeholder_avatar)
                                 .into(userAvatarIV);
                     } else {

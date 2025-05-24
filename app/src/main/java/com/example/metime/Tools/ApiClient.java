@@ -299,7 +299,7 @@ public class ApiClient {
         RequestBody body = RequestBody.create(imageData, mediaType);
         Request request = new Request.Builder()
                 .url(DOMAIN_NAME + "storage/v1/object/avatars/" + userUuid + ".png")
-                .method("POST", body)
+                .method("PUT", body)
                 .addHeader("apikey", API_KEY)
                 .addHeader("Authorization", DataBinding.getBearerToken())
                 .addHeader("Content-Type", "image/png")

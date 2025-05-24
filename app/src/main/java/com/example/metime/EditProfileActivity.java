@@ -18,6 +18,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.metime.Models.Profile;
 import com.example.metime.Models.ProfileUpdate;
 import com.example.metime.Models.User;
@@ -116,6 +118,7 @@ public class EditProfileActivity extends AppCompatActivity {
                         Glide.with(EditProfileActivity.this)
                                 .load(url + profile.getAvatar_url())
                                 .placeholder(R.drawable.placeholder_avatar)
+                                .signature(new ObjectKey(String.valueOf(System.currentTimeMillis())))
                                 .error(R.drawable.placeholder_avatar)
                                 .into(userAvatarIV);
                         // Разделяем username на first_name и last_name

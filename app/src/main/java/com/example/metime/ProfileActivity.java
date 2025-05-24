@@ -15,6 +15,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.metime.Fragments.SidePanelDialogFragment;
 import com.example.metime.Models.Profile;
 import com.example.metime.Tools.ApiClient;
@@ -136,6 +138,7 @@ public class ProfileActivity extends AppCompatActivity implements SidePanelDialo
                         Glide.with(getApplicationContext())
                                 .load(url + profile.getAvatar_url())
                                 .placeholder(R.drawable.placeholder_avatar)
+                                .signature(new ObjectKey(String.valueOf(System.currentTimeMillis())))
                                 .error(R.drawable.placeholder_avatar)
                                 .into(UserAvatarIV);
                         UserFullNameTV.setText(profile.getUsername());
