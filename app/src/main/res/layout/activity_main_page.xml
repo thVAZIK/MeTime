@@ -50,7 +50,7 @@
             android:layout_marginLeft="7dp"
             android:layout_marginRight="5dp"
             android:fontFamily="@font/raleway_bold"
-            android:text="Carol"
+            android:text="FirstName"
             android:textColor="@color/primary"
             android:textSize="24sp" />
     </LinearLayout>

@@ -1,5 +1,7 @@
 package com.example.metime;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +19,9 @@ import com.google.android.material.textfield.TextInputEditText;
 public class SetupPINActivity extends AppCompatActivity {
     ImageView BackBtn;
     TextInputEditText[] codeFields;
+    private static final String PREFS_NAME = "MeTimePrefs";
+    private static final String KEY_PIN_CODE = "pin_code";
+
     private void init() {
         BackBtn = findViewById(R.id.BackBtn);
         codeFields = new TextInputEditText[] {
@@ -25,6 +30,7 @@ public class SetupPINActivity extends AppCompatActivity {
                 findViewById(R.id._3btnET),
                 findViewById(R.id._4btnET),
         };
+        codeFields[0].requestFocus();
     }
 
     @Override
@@ -61,17 +67,40 @@ public class SetupPINActivity extends AppCompatActivity {
                         } else {
                             StringBuilder code = new StringBuilder();
                             for (TextInputEditText field : codeFields) {
-                                code.append(field.getText().toString());
+                                String input = field.getText().toString().trim();
+                                if (input.isEmpty()) {
+                                    Toast.makeText(SetupPINActivity.this, "Please enter all 4 digits", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                code.append(input);
                             }
-                            Toast.makeText(getApplicationContext(),
-                                    // TODO
-                                    "Code entered: " + code.toString() + ". Data saved.",
-                                    Toast.LENGTH_LONG).show();
-                            // TODO
+                            String pin = code.toString();
+                            if (!pin.matches("\\d{4}")) {
+                                Toast.makeText(SetupPINActivity.this, "PIN must be 4 digits", Toast.LENGTH_SHORT).show();
+                                clearFields();
+                                return;
+                            }
+
+                            // Сохранение PIN-кода в SharedPreferences
+                            SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString(KEY_PIN_CODE, pin);
+                            editor.apply();
+
+                            Toast.makeText(SetupPINActivity.this, "PIN code saved successfully", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(SetupPINActivity.this, MainPageActivity.class));
+                            finish();
                         }
                     }
                 }
             });
         }
+    }
+
+    private void clearFields() {
+        for (TextInputEditText field : codeFields) {
+            field.setText("");
+        }
+        codeFields[0].requestFocus();
     }
 }

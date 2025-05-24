@@ -19,4 +19,12 @@ public class DataBinding {
     public static void saveUuidUser(String uuidUser) {
         DataBinding.uuidUser = uuidUser;
     }
+
+    public static void clearUuidUser() {
+        uuidUser = null;
+    }
+
+    public static void clearBearerToken() {
+        bearerToken = null;
+    }
 }

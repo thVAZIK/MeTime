@@ -31,8 +31,11 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText EmailET, PasswordET;
     private static final String PREFS_NAME = "MeTimePrefs";
     private static final String KEY_FIRST_LAUNCH = "isFirstLaunch";
-    private static final String KEY_ACCESS_TOKEN = "access_token";
+    private static final String KEY_EMAIL = "user_email";
+    private static final String KEY_PASSWORD = "user_password";
     private static final String KEY_USER_ID = "user_id";
+    private static final String KEY_ACCESS_TOKEN = "access_token";
+    private static final String KEY_PIN_CODE = "pin_code";
 
     private void init() {
         SignUpBtn = findViewById(R.id.SignUpBtn);
@@ -55,13 +58,6 @@ public class LoginActivity extends AppCompatActivity {
         });
         init();
 
-        // Проверка автоматической авторизации
-        if (isLoggedIn()) {
-            startActivity(new Intent(getApplicationContext(), MainPageActivity.class));
-            finish();
-            return;
-        }
-
         // Обработка завершения онбординга
         if (getIntent().getBooleanExtra("completeOnboarding", false)) {
             SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -82,12 +78,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private boolean isLoggedIn() {
-        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        String accessToken = prefs.getString(KEY_ACCESS_TOKEN, null);
-        return accessToken != null;
-    }
-
     private void loginUser(String email, String password) {
         ApiClient api = new ApiClient(this);
         LoginRequest loginRequest = new LoginRequest(email, password);
@@ -97,10 +87,10 @@ public class LoginActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     Log.e("loginUser:onFailure", e.getLocalizedMessage());
                     String errorMessage = e.getMessage();
-                    if (errorMessage != null && errorMessage.contains("Invalid login credentials")) {
-                        Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_LONG).show();
+                    if (errorMessage != null && errorMessage.contains("code=400")) {
+                        Toast.makeText(LoginActivity.this, "Неверный email или пароль", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(LoginActivity.this, "Login failed: " + errorMessage, Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Ошибка входа: " + errorMessage, Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -113,30 +103,40 @@ public class LoginActivity extends AppCompatActivity {
                     AuthResponse auth;
                     try {
                         auth = gson.fromJson(responseBody, AuthResponse.class);
-                        if (auth.getAccess_token() == null) {
-                            Toast.makeText(LoginActivity.this, "Login failed: Invalid response", Toast.LENGTH_LONG).show();
+                        if (auth == null || auth.getAccess_token() == null || auth.getUser() == null) {
+                            Toast.makeText(LoginActivity.this, "Ошибка входа: неверный ответ сервера", Toast.LENGTH_LONG).show();
                             return;
                         }
                     } catch (Exception e) {
                         Log.e("loginUser:parseError", e.getLocalizedMessage());
-                        Toast.makeText(LoginActivity.this, "Error parsing response", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Ошибка обработки ответа сервера", Toast.LENGTH_LONG).show();
                         return;
                     }
 
                     // Сохранение данных в SharedPreferences
                     SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
-                    editor.putString(KEY_ACCESS_TOKEN, "Bearer " + auth.getAccess_token());
-                    editor.putString(KEY_USER_ID, auth.getId());
+                    editor.putString(KEY_EMAIL, email);
+                    editor.putString(KEY_PASSWORD, password);
+                    editor.putString(KEY_USER_ID, auth.getUser().getId());
+                    editor.putString(KEY_ACCESS_TOKEN, auth.getAccess_token());
                     editor.apply();
 
-                    // Сохранение в DataBinding для совместимости с другими частями приложения
+                    // Сохранение в DataBinding
                     DataBinding.saveBearerToken("Bearer " + auth.getAccess_token());
-                    DataBinding.saveUuidUser(auth.getId());
+                    DataBinding.saveUuidUser(auth.getUser().getId());
 
-                    // Переход в MainPageActivity
-                    Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), MainPageActivity.class));
+                    // Проверка наличия PIN-кода
+                    String savedPin = prefs.getString(KEY_PIN_CODE, null);
+                    Intent intent;
+                    if (savedPin == null) {
+                        intent = new Intent(LoginActivity.this, SetupPINActivity.class);
+                    } else {
+                        intent = new Intent(LoginActivity.this, MainPageActivity.class);
+                    }
+
+                    Toast.makeText(LoginActivity.this, "Вход выполнен успешно!", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
                     finish();
                 });
             }
@@ -149,11 +149,11 @@ public class LoginActivity extends AppCompatActivity {
         EmailIL.setError(null);
 
         if (email.isEmpty()) {
-            EmailIL.setError("Email is required");
+            EmailIL.setError("Email обязателен");
             return false;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            EmailIL.setError("Enter a valid email address");
+            EmailIL.setError("Введите корректный email");
             return false;
         }
         return true;
@@ -165,11 +165,11 @@ public class LoginActivity extends AppCompatActivity {
         PasswordIL.setError(null);
 
         if (password.isEmpty()) {
-            PasswordIL.setError("Password is required");
+            PasswordIL.setError("Пароль обязателен");
             return false;
         }
         if (password.length() < 8) {
-            PasswordIL.setError("Password must be at least 8 characters");
+            PasswordIL.setError("Пароль должен содержать минимум 8 символов");
             return false;
         }
         return true;

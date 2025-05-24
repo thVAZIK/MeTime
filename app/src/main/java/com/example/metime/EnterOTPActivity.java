@@ -1,6 +1,7 @@
 package com.example.metime;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.Editable;
@@ -81,9 +82,7 @@ public class EnterOTPActivity extends AppCompatActivity {
         setupTextWatchers();
         BackBtn.setOnClickListener(v -> finish());
 
-        sendCodeAgainTV.setOnClickListener(v -> {
-            resendOtp();
-        });
+        sendCodeAgainTV.setOnClickListener(v -> resendOtp());
 
         mainLayout.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             Rect r = new Rect();
@@ -169,7 +168,7 @@ public class EnterOTPActivity extends AppCompatActivity {
                     AuthResponse auth;
                     try {
                         auth = gson.fromJson(responseBody, AuthResponse.class);
-                        if (auth == null || auth.getUser().getId() == null) {
+                        if (auth == null || auth.getUser() == null || auth.getUser().getId() == null) {
                             Toast.makeText(EnterOTPActivity.this, "Registration failed: Invalid response", Toast.LENGTH_LONG).show();
                             return;
                         }
@@ -178,12 +177,23 @@ public class EnterOTPActivity extends AppCompatActivity {
                         Toast.makeText(EnterOTPActivity.this, "Error parsing response", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    // TODO
                     Toast.makeText(EnterOTPActivity.this, "Account verified successfully!", Toast.LENGTH_LONG).show();
-                    // TODO
                     DataBinding.saveUuidUser(auth.getUser().getId());
                     DataBinding.saveBearerToken("Bearer " + auth.getAccess_token());
+
+                    // Сохранение email и пароля в SharedPreferences
+                    SharedPreferences prefs = getSharedPreferences("MeTimePrefs", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("user_email", email);
+                    editor.putString("user_password", getIntent().getStringExtra("password"));
+                    editor.putString("user_id", auth.getUser().getId());
+                    editor.putString("access_token", auth.getAccess_token());
+                    editor.apply();
+
                     updateProfile(fullname);
+                    // Переход в SetupPINActivity вместо MainPageActivity
+                    startActivity(new Intent(EnterOTPActivity.this, SetupPINActivity.class));
+                    finish();
                 });
             }
         });
@@ -211,7 +221,6 @@ public class EnterOTPActivity extends AppCompatActivity {
     }
 
     private void resendOtp() {
-        // Повторная отправка OTP через регистрацию
         String email = getIntent().getStringExtra("email");
         String password = getIntent().getStringExtra("password");
         if (email == null || password == null) {

@@ -178,6 +178,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/EmailET"
+            android:enabled="false"
             android:fontFamily="@font/raleway_semibold"
             android:layout_width="match_parent"
             android:layout_height="54dp"
