@@ -1,4 +1,5 @@
 # MeTime
+[![Android CI](https://github.com/thVAZIK/MeTime/actions/workflows/android.yml/badge.svg)](https://github.com/thVAZIK/MeTime/actions/workflows/android.yml)
 
 This application, **MeTime**, is being developed as part of a college practicum.
 
