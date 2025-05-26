@@ -242,7 +242,7 @@ public class MainPageActivity extends AppCompatActivity implements SidePanelDial
                         List<Appointment> appointments = gson.fromJson(responseBody, type);
 
                         if (appointments == null || appointments.isEmpty()) {
-                            LastAssignmentCV.setVisibility(View.GONE);
+                            LastAssignmentCV.setVisibility(View.INVISIBLE);
                             return;
                         }
 
