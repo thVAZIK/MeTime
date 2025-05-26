@@ -5,11 +5,14 @@
     android:orientation="vertical"
     android:paddingRight="4dp">
 
-    <Button
+    <CheckBox
+        android:button="@null"
+        android:id="@+id/Button"
         android:layout_width="135dp"
         android:layout_height="32dp"
         android:background="@drawable/button_border_selector_time"
         android:fontFamily="@font/raleway_semibold"
+        android:textAlignment="center"
         android:paddingTop="-10dp"
         android:text="Recommended"
         android:textColor="@color/gray2" />

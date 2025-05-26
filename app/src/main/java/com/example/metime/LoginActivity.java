@@ -86,11 +86,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(IOException e) {
                 runOnUiThread(() -> {
                     Log.e("loginUser:onFailure", e.getLocalizedMessage());
-                    String errorMessage = e.getMessage();
-                    if (errorMessage != null && errorMessage.contains("code=400")) {
-                        Toast.makeText(LoginActivity.this, "Неверный email или пароль", Toast.LENGTH_LONG).show();
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("loginUser:onFailure", errorBody);
+                    if (errorBody != null && errorBody.contains("user_banned")) {
+                        Toast.makeText(LoginActivity.this, "This account is banned. Please, contact administrator for more information", Toast.LENGTH_LONG).show();
+                    } else if (errorBody != null && errorBody.contains("invalid_credentials")) {
+                        Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(LoginActivity.this, "Ошибка входа: " + errorMessage, Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Login error: " + errorBody, Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -104,12 +112,12 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         auth = gson.fromJson(responseBody, AuthResponse.class);
                         if (auth == null || auth.getAccess_token() == null || auth.getUser() == null) {
-                            Toast.makeText(LoginActivity.this, "Ошибка входа: неверный ответ сервера", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Login error: invalid response from server", Toast.LENGTH_LONG).show();
                             return;
                         }
                     } catch (Exception e) {
                         Log.e("loginUser:parseError", e.getLocalizedMessage());
-                        Toast.makeText(LoginActivity.this, "Ошибка обработки ответа сервера", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Server response processing error", Toast.LENGTH_LONG).show();
                         return;
                     }
 
@@ -135,7 +143,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent = new Intent(LoginActivity.this, MainPageActivity.class);
                     }
 
-                    Toast.makeText(LoginActivity.this, "Вход выполнен успешно!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                     finish();
                 });
@@ -149,11 +157,11 @@ public class LoginActivity extends AppCompatActivity {
         EmailIL.setError(null);
 
         if (email.isEmpty()) {
-            EmailIL.setError("Email обязателен");
+            EmailIL.setError("Email is required");
             return false;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            EmailIL.setError("Введите корректный email");
+            EmailIL.setError("Enter a valid email address");
             return false;
         }
         return true;
@@ -165,11 +173,11 @@ public class LoginActivity extends AppCompatActivity {
         PasswordIL.setError(null);
 
         if (password.isEmpty()) {
-            PasswordIL.setError("Пароль обязателен");
+            PasswordIL.setError("Password is required");
             return false;
         }
         if (password.length() < 8) {
-            PasswordIL.setError("Пароль должен содержать минимум 8 символов");
+            PasswordIL.setError("Password must contain a minimum of 8 characters");
             return false;
         }
         return true;

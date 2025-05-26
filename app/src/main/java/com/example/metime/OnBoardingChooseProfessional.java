@@ -60,7 +60,16 @@ public class OnBoardingChooseProfessional extends AppCompatActivity {
         api.fetchAllMasters(new ApiClient.SBC_Callback() {
             @Override
             public void onFailure(IOException e) {
-                Log.e("fetch:GetAllMasters:onFailure", e.getLocalizedMessage());
+                runOnUiThread(() -> {
+                    Log.e("fetch:GetAllMasters:onError", e.getLocalizedMessage());
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("fetch:GetAllMasters:onError", errorBody);
+                });
             }
 
             @Override

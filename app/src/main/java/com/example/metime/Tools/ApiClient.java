@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.example.metime.Models.AppointmentStatusUpdate;
 import com.example.metime.Models.LoginRequest;
 import com.example.metime.Models.ProfileUpdate;
 import com.example.metime.Models.UserUpdateRequest;
@@ -21,8 +22,13 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ApiClient {
+
+
     public interface SBC_Callback {
         public void onFailure(IOException e);
+
+        public void onError(String errorBody);
+
         public void onResponse(String responseBody);
     }
 
@@ -35,6 +41,7 @@ public class ApiClient {
     public static String REST_PATH = "rest/v1/";
     public static String AUTH_PATH = "auth/v1/";
     public static String API_KEY;
+
     public void getUser(final SBC_Callback callback) {
         Request request = new Request.Builder()
                 .url(DOMAIN_NAME + AUTH_PATH + "user")
@@ -49,15 +56,16 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
                 }
             }
         });
     }
+
     public void getProfile(final SBC_Callback callback) {
         Request request = new Request.Builder()
                 .url(DOMAIN_NAME + REST_PATH + "profiles?select=*&id=eq." + DataBinding.getUuidUser())
@@ -73,41 +81,19 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
                 }
             }
         });
     }
-    public void fetchAllAppointments(final SBC_Callback callback) {
-        Request request = new Request.Builder()
-                .url(DOMAIN_NAME + REST_PATH + "Appointments?select=*,Masters(*),Services(*),Salons(*)")
-                .addHeader("apikey", API_KEY)
-                .addHeader("Authorization", DataBinding.getBearerToken())
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                callback.onFailure(e);
-            }
 
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
-                    callback.onResponse(responseBody);
-                } else {
-                    callback.onFailure(new IOException("Server error: " + response));
-                }
-            }
-        });
-    }
     public void fetchAllUserAppointments(final SBC_Callback callback) {
         Request request = new Request.Builder()
-                .url(DOMAIN_NAME + REST_PATH + "Appointments?select=*,Masters(*),Services(*),Salons(*)&ProfileID=eq." + DataBinding.getUuidUser())
+                .url(DOMAIN_NAME + REST_PATH + "Appointments?select=*,Masters(*, Master_Ratings_Summary(*)),Services(*),Salons(*)&status=neq.4")
                 .addHeader("apikey", API_KEY)
                 .addHeader("Authorization", DataBinding.getBearerToken())
                 .build();
@@ -119,15 +105,16 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
                 }
             }
         });
     }
+
     public void login(LoginRequest loginRequest, final SBC_Callback callback) {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -149,15 +136,16 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
                 }
             }
         });
     }
+
     public void register(LoginRequest loginRequest, final SBC_Callback callback) {
         MediaType mediaType = MediaType.parse("application/json");
         Gson gson = new Gson();
@@ -177,15 +165,16 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
                 }
             }
         });
     }
+
     public void updateProfile(ProfileUpdate profile, final SBC_Callback callback) {
         MediaType mediaType = MediaType.parse("application/json");
         Gson gson = new Gson();
@@ -207,11 +196,11 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
                 }
             }
         });
@@ -231,11 +220,11 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
                 }
             }
         });
@@ -255,11 +244,11 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
                 }
             }
         });
@@ -284,11 +273,11 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
                 }
             }
         });
@@ -312,11 +301,11 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
                 }
             }
         });
@@ -342,11 +331,66 @@ public class ApiClient {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
                 if (response.isSuccessful()) {
-                    String responseBody = response.body().string();
                     callback.onResponse(responseBody);
                 } else {
-                    callback.onFailure(new IOException("Server error: " + response));
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void fetchAllActiveBanners(final SBC_Callback callback) {
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Banners?select=*&is_active=eq.true")
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void updateAppointmentStatus(int appointmentId, int status, final SBC_Callback callback) {
+        MediaType mediaType = MediaType.parse("application/json");
+        Gson gson = new Gson();
+        String json = gson.toJson(new AppointmentStatusUpdate(status));
+        RequestBody body = RequestBody.create(json, mediaType);
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Appointments?appointment_id=eq." + appointmentId)
+                .method("PATCH", body)
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Prefer", "return=minimal")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
                 }
             }
         });

@@ -77,13 +77,20 @@ public class MainActivity extends AppCompatActivity {
             public void onFailure(IOException e) {
                 runOnUiThread(() -> {
                     Log.e("autoLogin:onFailure", e.getLocalizedMessage());
-                    String errorMessage = e.getMessage();
-                    if (errorMessage != null && errorMessage.contains("Invalid login credentials")) {
-                        Toast.makeText(MainActivity.this, "Автоматический вход не удался: неверные данные", Toast.LENGTH_LONG).show();
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("autoLogin:onError", errorBody);
+                    if (errorBody != null && errorBody.contains("user_banned")) {
+                        Toast.makeText(MainActivity.this, "This account is banned. Please, contact administrator for more information", Toast.LENGTH_LONG).show();
+                    } else if (errorBody != null && errorBody.contains("invalid_credentials")) {
+                        Toast.makeText(MainActivity.this, "Неверный email или пароль", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(MainActivity.this, "Автоматический вход не удался: " + errorMessage, Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Ошибка входа: " + errorBody, Toast.LENGTH_LONG).show();
                     }
-                    // Очистить данные и перейти в LoginActivity
                     clearLoginData();
                     proceedToLogin();
                 });

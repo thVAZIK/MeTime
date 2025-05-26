@@ -38,7 +38,7 @@ public class EnterOTPActivity extends AppCompatActivity {
     private String fullname;
 
     private void init() {
-        codeFields = new TextInputEditText[] {
+        codeFields = new TextInputEditText[]{
                 findViewById(R.id._1btnET),
                 findViewById(R.id._2btnET),
                 findViewById(R.id._3btnET),
@@ -82,7 +82,7 @@ public class EnterOTPActivity extends AppCompatActivity {
         setupTextWatchers();
         BackBtn.setOnClickListener(v -> finish());
 
-        sendCodeAgainTV.setOnClickListener(v -> resendOtp());
+        // sendCodeAgainTV.setOnClickListener(v -> resendOtp());
 
         mainLayout.getViewTreeObserver().addOnGlobalLayoutListener(() -> {
             Rect r = new Rect();
@@ -107,10 +107,12 @@ public class EnterOTPActivity extends AppCompatActivity {
             final int index = i;
             codeFields[i].addTextChangedListener(new TextWatcher() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
 
                 @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {}
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
 
                 @Override
                 public void afterTextChanged(Editable s) {
@@ -150,11 +152,18 @@ public class EnterOTPActivity extends AppCompatActivity {
             public void onFailure(IOException e) {
                 runOnUiThread(() -> {
                     Log.e("verifyUser:onFailure", e.getLocalizedMessage());
-                    String errorMessage = e.getMessage();
-                    if (errorMessage != null && errorMessage.contains("Invalid token")) {
+                    clearFields();
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("verifyUser:onError", errorBody);
+                    if (errorBody != null && errorBody.contains("Invalid token")) {
                         Toast.makeText(EnterOTPActivity.this, "Invalid OTP. Please try again or resend code.", Toast.LENGTH_LONG).show();
                     } else {
-                        Toast.makeText(EnterOTPActivity.this, "Verification failed: " + errorMessage, Toast.LENGTH_LONG).show();
+                        Toast.makeText(EnterOTPActivity.this, "Verification failed: " + errorBody, Toast.LENGTH_LONG).show();
                     }
                     clearFields();
                 });
@@ -207,7 +216,15 @@ public class EnterOTPActivity extends AppCompatActivity {
             public void onFailure(IOException e) {
                 runOnUiThread(() -> {
                     Log.e("updateProfile:onFailure", e.getLocalizedMessage());
-                    Toast.makeText(EnterOTPActivity.this, "Failed to update profile: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(EnterOTPActivity.this, "Failed to update profile", Toast.LENGTH_LONG).show();
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("updateProfile:onError", errorBody);
+                    Toast.makeText(EnterOTPActivity.this, "Failed to update profile", Toast.LENGTH_LONG).show();
                 });
             }
 
@@ -220,6 +237,7 @@ public class EnterOTPActivity extends AppCompatActivity {
         });
     }
 
+    // NOT USED
     private void resendOtp() {
         String email = getIntent().getStringExtra("email");
         String password = getIntent().getStringExtra("password");
@@ -237,6 +255,11 @@ public class EnterOTPActivity extends AppCompatActivity {
                     Log.e("resendOtp:onFailure", e.getLocalizedMessage());
                     Toast.makeText(EnterOTPActivity.this, "Failed to resend OTP: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+
             }
 
             @Override

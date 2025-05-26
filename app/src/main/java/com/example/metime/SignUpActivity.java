@@ -93,7 +93,15 @@ public class SignUpActivity extends AppCompatActivity {
             public void onFailure(IOException e) {
                 runOnUiThread(() -> {
                     Log.e("authUser:onFailure", e.getLocalizedMessage());
-                    Toast.makeText(SignUpActivity.this, "Registration failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUpActivity.this, "Registration failed", Toast.LENGTH_LONG).show();
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("authUser:onError", errorBody);
+                    Toast.makeText(SignUpActivity.this, "Registration failed", Toast.LENGTH_LONG).show();
                 });
             }
 

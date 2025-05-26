@@ -65,7 +65,16 @@ public class OnBoardingChooseFitActivity extends AppCompatActivity {
         api.fetchAllServices(new ApiClient.SBC_Callback() {
             @Override
             public void onFailure(IOException e) {
-                Log.e("fetch:GetAllServices:onFailure", e.getLocalizedMessage());
+                runOnUiThread(() -> {
+                    Log.e("fetch:GetAllServices:onFailure", e.getLocalizedMessage());
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("fetch:GetAllServices:onError", errorBody);
+                });
             }
 
             @Override

@@ -106,6 +106,14 @@ public class EditProfileActivity extends AppCompatActivity {
             }
 
             @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("fetch:user:onError", errorBody);
+                    Toast.makeText(EditProfileActivity.this, "Не удалось загрузить профиль", Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
             public void onResponse(String responseBody) {
                 runOnUiThread(() -> {
                     Log.d("fetch:user:onResponse", responseBody);
@@ -134,6 +142,14 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onFailure(IOException e) {
                 runOnUiThread(() -> {
                     Log.e("fetch:userEmail:onFailure", e.getLocalizedMessage());
+                    Toast.makeText(EditProfileActivity.this, "Не удалось загрузить email", Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("fetch:userEmail:onError", errorBody);
                     Toast.makeText(EditProfileActivity.this, "Не удалось загрузить email", Toast.LENGTH_SHORT).show();
                 });
             }
@@ -196,6 +212,14 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
 
                     @Override
+                    public void onError(String errorBody) {
+                        runOnUiThread(() -> {
+                            Log.e("uploadAvatar:onError", errorBody);
+                            Toast.makeText(EditProfileActivity.this, "Не удалось загрузить аватарку", Toast.LENGTH_SHORT).show();
+                        });
+                    }
+
+                    @Override
                     public void onResponse(String responseBody) {
                         runOnUiThread(() -> {
                             Log.d("uploadAvatar:onResponse", responseBody);
@@ -222,7 +246,15 @@ public class EditProfileActivity extends AppCompatActivity {
             public void onFailure(IOException e) {
                 runOnUiThread(() -> {
                     Log.e("updateProfile:onFailure", e.getLocalizedMessage());
-                    Toast.makeText(EditProfileActivity.this, "Не удалось обновить профиль: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditProfileActivity.this, "Не удалось обновить профиль", Toast.LENGTH_LONG).show();
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("updateProfile:onError", errorBody);
+                    Toast.makeText(EditProfileActivity.this, "Не удалось обновить профиль", Toast.LENGTH_LONG).show();
                 });
             }
 

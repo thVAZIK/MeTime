@@ -212,6 +212,14 @@ public class SidePanelDialogFragment extends DialogFragment {
             }
 
             @Override
+            public void onError(String errorBody) {
+                requireActivity().runOnUiThread(() -> {
+                    Log.e("fetch:userAvatar:onError", errorBody);
+                    userAvatarIV.setImageResource(R.drawable.placeholder_avatar);
+                });
+            }
+
+            @Override
             public void onResponse(String responseBody) {
                 requireActivity().runOnUiThread(() -> {
                     Log.d("fetch:userAvatar:onResponse", responseBody);

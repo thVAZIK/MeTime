@@ -72,6 +72,13 @@ public class ProfileActivity extends AppCompatActivity implements SidePanelDialo
             }
         });
 
+        ChangePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ProfileActivity.this, ChangePasswordActivity.class));
+            }
+        });
+
         LogOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,6 +129,13 @@ public class ProfileActivity extends AppCompatActivity implements SidePanelDialo
             public void onFailure(IOException e) {
                 runOnUiThread(() -> {
                     Log.e("fetch:user:onFailure", e.getLocalizedMessage());
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("fetch:user:onError", errorBody);
                 });
             }
 
