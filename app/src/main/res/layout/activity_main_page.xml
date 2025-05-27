@@ -1,230 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp">
 
-    <TextView
-        android:id="@+id/MeTimeSign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/raleway_bold"
-        android:text="MeTime"
-        android:textSize="19sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/MenuBtn"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="11dp"
-        android:src="@drawable/menu"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/MeTimeSign" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-4dp"
-        app:layout_constraintLeft_toRightOf="@id/MenuBtn"
-        app:layout_constraintTop_toTopOf="@id/MenuBtn">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:fontFamily="@font/raleway_medium"
-            android:text="Hello,"
-            android:textColor="@color/gray3"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/FirstNameUserTV"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:layout_marginRight="5dp"
-            android:fontFamily="@font/raleway_bold"
-            android:text="FirstName"
-            android:textColor="@color/primary"
-            android:textSize="24sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/SearchButtonLL"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:background="#F6F6F6"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="15dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/MenuBtn">
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/MeTimeSign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_bold"
+            android:text="MeTime"
+            android:textSize="19sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/SearchIV"
+            android:id="@+id/MenuBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="11dp"
+            android:src="@drawable/menu"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/MeTimeSign" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/search" />
+            android:layout_marginTop="-4dp"
+            app:layout_constraintLeft_toRightOf="@id/MenuBtn"
+            app:layout_constraintTop_toTopOf="@id/MenuBtn">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Hello,"
+                android:textColor="@color/gray3"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/FirstNameUserTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="5dp"
+                android:fontFamily="@font/raleway_bold"
+                android:text="FirstName"
+                android:textColor="@color/primary"
+                android:textSize="24sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/SearchButtonLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="21dp"
+            android:background="#F6F6F6"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/MenuBtn">
+
+            <ImageView
+                android:id="@+id/SearchIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:fontFamily="@font/raleway_medium"
+                android:text="Search"
+                android:textColor="@color/gray2" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/BannersRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:orientation="horizontal"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SearchButtonLL"
+            tools:listitem="@layout/item_banner" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/SelectionRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/BannersRV"
+            tools:listitem="@layout/item_nav_select" />
+
+        <TextView
+            android:id="@+id/UpcomingSign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Upcoming"
+            android:textColor="@color/gray3"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SelectionRV" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:fontFamily="@font/raleway_medium"
-            android:text="Search"
-            android:textColor="@color/gray2" />
+            android:text="You don't have any appointment yet"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/LastAssignmentCV"
+            app:layout_constraintLeft_toLeftOf="@id/LastAssignmentCV"
+            app:layout_constraintTop_toTopOf="@id/LastAssignmentCV" />
 
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/BannersRV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/SearchButtonLL"
-        tools:listitem="@layout/item_banner" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/SelectionRV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/BannersRV"
-        tools:listitem="@layout/item_nav_select" />
-
-    <TextView
-        android:id="@+id/UpcomingSign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Upcoming"
-        android:textColor="@color/gray3"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/SelectionRV" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="You don't have any appointment yet"
-        app:layout_constraintLeft_toLeftOf="@+id/LastAssignmentCV"
-        app:layout_constraintTop_toTopOf="@id/LastAssignmentCV"
-        app:layout_constraintBottom_toBottomOf="@id/LastAssignmentCV"
-        android:fontFamily="@font/raleway_medium"
-        android:textSize="16sp"/>
-
-    <androidx.cardview.widget.CardView
-        android:visibility="invisible"
-        android:id="@+id/LastAssignmentCV"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_marginTop="20dp"
-        app:cardBackgroundColor="#F9F9FB"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/UpcomingSign">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/LastAssignmentCV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="72dp"
+            android:layout_marginTop="20dp"
+            android:visibility="invisible"
+            app:cardBackgroundColor="#F9F9FB"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/UpcomingSign">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/DateCV"
-                android:layout_width="74dp"
-                android:layout_height="match_parent"
-                app:cardBackgroundColor="@color/primary"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/DateCV"
+                    android:layout_width="74dp"
+                    android:layout_height="match_parent"
+                    app:cardBackgroundColor="@color/primary"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/DateLastAssignmentTV"
+                        android:layout_width="45dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/raleway_bold"
+                        android:text="19 Oct"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+                </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/DateLastAssignmentTV"
-                    android:layout_width="45dp"
+                    android:id="@+id/ServiceLastAssignmentTV"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/raleway_semibold"
+                    android:text="Basic Pedicure"
+                    android:textColor="#3E3E3E"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toRightOf="@id/DateCV"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/MasterFirstNameLastAssignmentTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:fontFamily="@font/raleway_medium"
+                    android:text="with Paty"
+                    android:textColor="@color/gray2"
+                    android:textSize="12sp"
+                    app:layout_constraintLeft_toRightOf="@id/DateCV"
+                    app:layout_constraintTop_toBottomOf="@id/ServiceLastAssignmentTV" />
+
+                <TextView
+                    android:id="@+id/TimeLastAssignmentTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginBottom="4dp"
                     android:fontFamily="@font/raleway_bold"
-                    android:text="19 Oct"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-            </androidx.cardview.widget.CardView>
+                    android:text="Tuesday, 04:30pm"
+                    android:textColor="#001C33"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/DateCV" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/ServiceLastAssignmentTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/raleway_semibold"
-                android:text="Basic Pedicure"
-                android:textColor="#3E3E3E"
-                android:textSize="14sp"
-                app:layout_constraintLeft_toRightOf="@id/DateCV"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/ServicesSign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:fontFamily="@font/raleway_bold"
+            android:text="Services"
+            android:textColor="@color/gray3"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/LastAssignmentCV" />
 
-            <TextView
-                android:id="@+id/MasterFirstNameLastAssignmentTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:fontFamily="@font/raleway_medium"
-                android:text="with Paty"
-                android:textColor="@color/gray2"
-                android:textSize="12sp"
-                app:layout_constraintLeft_toRightOf="@id/DateCV"
-                app:layout_constraintTop_toBottomOf="@id/ServiceLastAssignmentTV" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ServicesRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:nestedScrollingEnabled="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ServicesSign"
+            tools:listitem="@layout/item_services_main_page" />
 
-            <TextView
-                android:id="@+id/TimeLastAssignmentTV"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/raleway_bold"
-                android:text="Tuesday, 04:30pm"
-                android:textColor="#001C33"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/DateCV" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/ServicesSign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="Services"
-        android:textColor="@color/gray3"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/LastAssignmentCV" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ServicesRV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ServicesSign"
-        tools:listitem="@layout/item_services_main_page" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -52,6 +52,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="16dp">
         <TextView
+            android:id="@+id/DateTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tuesday, 19"
@@ -60,6 +61,7 @@
             android:textSize="18sp"
             android:layout_marginRight="15dp"/>
         <TextView
+            android:id="@+id/TimeTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="04:30pm"
@@ -82,6 +84,7 @@
         android:layout_marginTop="16dp"/>
 
     <TextView
+        android:id="@+id/LocationTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="8502 Preston Rd. Inglewood"

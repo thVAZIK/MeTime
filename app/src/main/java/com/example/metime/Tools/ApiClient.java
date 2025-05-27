@@ -4,6 +4,8 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.example.metime.Models.Appointment;
+import com.example.metime.Models.AppointmentInsert;
 import com.example.metime.Models.AppointmentStatusUpdate;
 import com.example.metime.Models.LoginRequest;
 import com.example.metime.Models.ProfileUpdate;
@@ -208,7 +210,7 @@ public class ApiClient {
 
     public void fetchAllServices(final SBC_Callback callback) {
         Request request = new Request.Builder()
-                .url(DOMAIN_NAME + REST_PATH + "Services?select=*")
+                .url(DOMAIN_NAME + REST_PATH + "Services?select=*,Salons(*)")
                 .addHeader("apikey", API_KEY)
                 .addHeader("Authorization", DataBinding.getBearerToken())
                 .build();
@@ -373,6 +375,61 @@ public class ApiClient {
         Request request = new Request.Builder()
                 .url(DOMAIN_NAME + REST_PATH + "Appointments?appointment_id=eq." + appointmentId)
                 .method("PATCH", body)
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Prefer", "return=minimal")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void fetchAllMasterCalendars(final SBC_Callback callback) {
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Master_Calendars?select=*,Masters(*)")
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void createAppointment(AppointmentInsert appointment, final SBC_Callback callback) {
+        MediaType mediaType = MediaType.parse("application/json");
+        Gson gson = new Gson();
+        String json = gson.toJson(appointment);
+        RequestBody body = RequestBody.create(json, mediaType);
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Appointments")
+                .method("POST", body)
                 .addHeader("apikey", API_KEY)
                 .addHeader("Authorization", DataBinding.getBearerToken())
                 .addHeader("Content-Type", "application/json")

@@ -7,15 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.signature.ObjectKey;
 import com.example.metime.Fragments.SidePanelDialogFragment;
 import com.example.metime.Models.Profile;
@@ -23,7 +21,6 @@ import com.example.metime.Tools.ApiClient;
 import com.example.metime.Tools.DataBinding;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -31,12 +28,14 @@ import java.util.List;
 public class ProfileActivity extends AppCompatActivity implements SidePanelDialogFragment.OnNavigationItemSelectedListener {
     ImageView MenuBtn, UserAvatarIV;
     TextView UserFullNameTV, ChangeProfileDataBtn, ChangePasswordButton, LogOutBtn;
+    SwipeRefreshLayout swipeRefreshLayout;
     private static final String PREFS_NAME = "MeTimePrefs";
     private static final String KEY_PIN_CODE = "pin_code";
     private static final String KEY_EMAIL = "user_email";
     private static final String KEY_PASSWORD = "user_password";
     private static final String KEY_USER_ID = "user_id";
     private static final String KEY_ACCESS_TOKEN = "access_token";
+
     private void init() {
         MenuBtn = findViewById(R.id.MenuBtn);
         UserAvatarIV = findViewById(R.id.UserAvatarIV);
@@ -44,6 +43,11 @@ public class ProfileActivity extends AppCompatActivity implements SidePanelDialo
         ChangeProfileDataBtn = findViewById(R.id.ChangeProfileDataBtn);
         ChangePasswordButton = findViewById(R.id.ChangePasswordButton);
         LogOutBtn = findViewById(R.id.LogOutBtn);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+
+        // Setup SwipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(this::refreshData);
+
         getCurrentUser();
     }
 
@@ -65,40 +69,39 @@ public class ProfileActivity extends AppCompatActivity implements SidePanelDialo
             sidePanel.show(getSupportFragmentManager(), "SidePanelDialogFragment");
         });
 
-        ChangeProfileDataBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
-            }
+        ChangeProfileDataBtn.setOnClickListener(view -> {
+            startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
         });
 
-        ChangePasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ProfileActivity.this, ChangePasswordActivity.class));
-            }
+        ChangePasswordButton.setOnClickListener(view -> {
+            startActivity(new Intent(ProfileActivity.this, ChangePasswordActivity.class));
         });
 
-        LogOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.remove(KEY_EMAIL);
-                editor.remove(KEY_PASSWORD);
-                editor.remove(KEY_USER_ID);
-                editor.remove(KEY_ACCESS_TOKEN);
-                editor.remove(KEY_PIN_CODE);
-                editor.apply();
-                DataBinding.clearUuidUser();
-                DataBinding.clearBearerToken();
+        LogOutBtn.setOnClickListener(view -> {
+            SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove(KEY_EMAIL);
+            editor.remove(KEY_PASSWORD);
+            editor.remove(KEY_USER_ID);
+            editor.remove(KEY_ACCESS_TOKEN);
+            editor.remove(KEY_PIN_CODE);
+            editor.apply();
+            DataBinding.clearUuidUser();
+            DataBinding.clearBearerToken();
 
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
+    }
+
+    private void refreshData() {
+        getCurrentUser();
+    }
+
+    private void completeRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -109,7 +112,6 @@ public class ProfileActivity extends AppCompatActivity implements SidePanelDialo
                 finish();
                 break;
             case "profile":
-
                 break;
             case "bookings":
                 startActivity(new Intent(getApplicationContext(), BookingsActivity.class));
@@ -123,12 +125,14 @@ public class ProfileActivity extends AppCompatActivity implements SidePanelDialo
     }
 
     private void getCurrentUser() {
-        ApiClient supabaseClient = new ApiClient(ProfileActivity.this);
+        swipeRefreshLayout.setRefreshing(true); // Start refresh animation
+        ApiClient supabaseClient = new ApiClient(this);
         supabaseClient.getProfile(new ApiClient.SBC_Callback() {
             @Override
             public void onFailure(IOException e) {
                 runOnUiThread(() -> {
                     Log.e("fetch:user:onFailure", e.getLocalizedMessage());
+                    completeRefresh();
                 });
             }
 
@@ -136,6 +140,7 @@ public class ProfileActivity extends AppCompatActivity implements SidePanelDialo
             public void onError(String errorBody) {
                 runOnUiThread(() -> {
                     Log.e("fetch:user:onError", errorBody);
+                    completeRefresh();
                 });
             }
 
@@ -144,7 +149,7 @@ public class ProfileActivity extends AppCompatActivity implements SidePanelDialo
                 runOnUiThread(() -> {
                     Log.d("fetch:user:onResponse", responseBody);
                     Gson gson = new Gson();
-                    Type type = new TypeToken<List<Profile>>(){}.getType();
+                    Type type = new TypeToken<List<Profile>>() {}.getType();
                     List<Profile> profiles = gson.fromJson(responseBody, type);
                     if (profiles != null && !profiles.isEmpty()) {
                         Profile profile = profiles.get(0);
@@ -157,6 +162,7 @@ public class ProfileActivity extends AppCompatActivity implements SidePanelDialo
                                 .into(UserAvatarIV);
                         UserFullNameTV.setText(profile.getUsername());
                     }
+                    completeRefresh();
                 });
             }
         });

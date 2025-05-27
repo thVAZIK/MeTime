@@ -6,41 +6,42 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.example.metime.Adapters.ViewPagerAdapter;
 import com.example.metime.Fragments.SidePanelDialogFragment;
-import com.example.metime.Fragments.WarningCancelFragment;
 import com.example.metime.Models.Appointment;
 import com.example.metime.Tools.ApiClient;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BookingsActivity extends AppCompatActivity implements SidePanelDialogFragment.OnNavigationItemSelectedListener{
-
+public class BookingsActivity extends AppCompatActivity implements SidePanelDialogFragment.OnNavigationItemSelectedListener {
     private TabLayout tabLayout;
     private ViewPager2 viewPager;
     private ViewPagerAdapter viewPagerAdapter;
-    ImageView MenuBtn;
+    private ImageView MenuBtn;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private void init() {
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         MenuBtn = findViewById(R.id.MenuBtn);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
+
+        // Setup SwipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener(this::refreshData);
     }
 
     @Override
@@ -54,9 +55,8 @@ public class BookingsActivity extends AppCompatActivity implements SidePanelDial
             return insets;
         });
         init();
-        fetchAppointments();
 
-        viewPagerAdapter = new ViewPagerAdapter();
+        viewPagerAdapter = new ViewPagerAdapter(this, swipeRefreshLayout);
         viewPager.setAdapter(viewPagerAdapter);
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
@@ -70,14 +70,21 @@ public class BookingsActivity extends AppCompatActivity implements SidePanelDial
             }
         }).attach();
 
-        MenuBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SidePanelDialogFragment sidePanel = SidePanelDialogFragment.newInstance("bookings");
-                sidePanel.setOnNavigationItemSelectedListener(BookingsActivity.this);
-                sidePanel.show(getSupportFragmentManager(), "SidePanelDialogFragment");
-            }
+        MenuBtn.setOnClickListener(view -> {
+            SidePanelDialogFragment sidePanel = SidePanelDialogFragment.newInstance("bookings");
+            sidePanel.setOnNavigationItemSelectedListener(this);
+            sidePanel.show(getSupportFragmentManager(), "SidePanelDialogFragment");
         });
+
+        fetchAppointments();
+    }
+
+    private void refreshData() {
+        fetchAppointments();
+    }
+
+    private void completeRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -92,7 +99,6 @@ public class BookingsActivity extends AppCompatActivity implements SidePanelDial
                 finish();
                 break;
             case "bookings":
-
                 break;
             case "support":
                 startActivity(new Intent(getApplicationContext(), SupportChatActivity.class));
@@ -102,6 +108,7 @@ public class BookingsActivity extends AppCompatActivity implements SidePanelDial
     }
 
     public void fetchAppointments() {
+        swipeRefreshLayout.setRefreshing(true);
         ApiClient api = new ApiClient(this);
         api.fetchAllUserAppointments(new ApiClient.SBC_Callback() {
             @Override
@@ -109,6 +116,7 @@ public class BookingsActivity extends AppCompatActivity implements SidePanelDial
                 runOnUiThread(() -> {
                     Log.d("fetchAppointments:OnFailure", e.getLocalizedMessage());
                     Toast.makeText(BookingsActivity.this, "Ошибка загрузки записей", Toast.LENGTH_SHORT).show();
+                    completeRefresh();
                 });
             }
 
@@ -117,6 +125,7 @@ public class BookingsActivity extends AppCompatActivity implements SidePanelDial
                 runOnUiThread(() -> {
                     Log.d("fetchAppointments:OnError", errorBody);
                     Toast.makeText(BookingsActivity.this, "Ошибка: " + errorBody, Toast.LENGTH_SHORT).show();
+                    completeRefresh();
                 });
             }
 
@@ -124,10 +133,8 @@ public class BookingsActivity extends AppCompatActivity implements SidePanelDial
             public void onResponse(String responseBody) {
                 runOnUiThread(() -> {
                     Log.d("fetchAppointments:OnResponse", responseBody);
-
                     Gson gson = new Gson();
-                    Type type = new TypeToken<List<Appointment>>() {
-                    }.getType();
+                    Type type = new TypeToken<List<Appointment>>() {}.getType();
                     List<Appointment> appointments = gson.fromJson(responseBody, type);
 
                     List<Appointment> pastAppointments = new ArrayList<>();
@@ -144,7 +151,7 @@ public class BookingsActivity extends AppCompatActivity implements SidePanelDial
 
                     viewPagerAdapter.updateData(0, pastAppointments);
                     viewPagerAdapter.updateData(1, upcomingAppointments);
-
+                    completeRefresh();
                 });
             }
         });

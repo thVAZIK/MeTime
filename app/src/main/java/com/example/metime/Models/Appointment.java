@@ -13,8 +13,8 @@ public class Appointment {
     private Date appointment_time;
     private int status;
     private Date created_at;
-    private Object updated_at;
-    private Object coupon_id;
+    private Date updated_at;
+    private String coupon_id;
     @SerializedName("Masters")
     private Master masters;
     @SerializedName("Services")
@@ -115,7 +115,7 @@ public class Appointment {
         return updated_at;
     }
 
-    public void setUpdated_at(Object updated_at) {
+    public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
     }
 
@@ -123,7 +123,7 @@ public class Appointment {
         return coupon_id;
     }
 
-    public void setCoupon_id(Object coupon_id) {
+    public void setCoupon_id(String coupon_id) {
         this.coupon_id = coupon_id;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.metime.Models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Service {
@@ -12,6 +14,8 @@ public class Service {
     private int service_id;
     private Date updated_at;
     private String description;
+    @SerializedName("Salons")
+    private Salon salons;
 
     public String getName() {
         return name;
@@ -83,5 +87,13 @@ public class Service {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Salon getSalons() {
+        return salons;
+    }
+
+    public void setSalons(Salon salons) {
+        this.salons = salons;
     }
 }

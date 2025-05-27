@@ -1,20 +1,20 @@
 package com.example.metime.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
+import com.example.metime.BookSelectSlotActivity;
+import com.example.metime.MainPageActivity;
 import com.example.metime.Models.Service;
 import com.example.metime.R;
-
 import java.util.List;
 
 public class ServicesMainPageAdapter extends RecyclerView.Adapter<ServicesMainPageAdapter.ViewHolder> {
@@ -44,6 +44,18 @@ public class ServicesMainPageAdapter extends RecyclerView.Adapter<ServicesMainPa
                 .load(url + item.getImage_link())
                 .error(R.drawable.placeholder_banner)
                 .into(holder.ImageOfServiceIV);
+
+        holder.main.setOnClickListener(v -> {
+            Intent intent = new Intent(context, BookSelectSlotActivity.class);
+            intent.putExtra("service_id", item.getService_id());
+            intent.putExtra("service_name", item.getName());
+            intent.putExtra("service_price", item.getPrice());
+            intent.putExtra("service_duration", item.getDuration());
+            intent.putExtra("service_image_link", item.getImage_link());
+            intent.putExtra("salon_id", item.getSalon_id());
+            intent.putExtra("salon_address", item.getSalons().getAddress());
+            ((MainPageActivity) context).startActivityForResult(intent, 101);
+        });
     }
 
     @Override
@@ -55,6 +67,7 @@ public class ServicesMainPageAdapter extends RecyclerView.Adapter<ServicesMainPa
         TextView ServiceNameTV, ServiceDurationTV, ServiceCostTV;
         ImageView ImageOfServiceIV;
         CardView main;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ServiceNameTV = itemView.findViewById(R.id.ServiceNameTV);
