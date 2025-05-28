@@ -1,66 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_margin="20dp">
+
     <TextView
         android:id="@+id/MeTimeSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_bold"
         android:text="Reviews"
         android:textSize="19sp"
-        android:fontFamily="@font/raleway_bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/BackBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/arrow_left"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/BackBtn"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/SalonNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The Gallery Salon"
         android:layout_marginTop="35dp"
         android:fontFamily="@font/raleway_bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/MeTimeSign"
+        android:text="The Gallery Salon"
         android:textColor="@color/black"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MeTimeSign" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ReviewTextTL"
-        android:layout_marginTop="23dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:boxCornerRadiusTopStart="10dp"
+        android:layout_marginTop="23dp"
+        android:hint="\n"
         app:boxCornerRadiusBottomEnd="10dp"
         app:boxCornerRadiusBottomStart="10dp"
         app:boxCornerRadiusTopEnd="10dp"
-        android:hint="\n"
-        app:layout_constraintTop_toBottomOf="@id/SalonNameTV"
+        app:boxCornerRadiusTopStart="10dp"
         app:boxStrokeColor="@color/primary"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SalonNameTV">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ReviewTextET"
-            android:fontFamily="@font/raleway_semibold"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
-            android:inputType="text"
+            android:layout_height="wrap_content"
+            android:minHeight="170dp"
+            android:fontFamily="@font/raleway_semibold"
+            android:inputType="textMultiLine"
+            android:gravity="top|start"
             android:padding="12dp"
-            android:textColorHint="@color/grayHint" />
+            android:scrollbars="vertical"
+            android:maxLines="10"
+            android:overScrollMode="always"
+            android:textColorHint="@color/gray3"
+            android:hint="Type your review here" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,102 +74,103 @@
         android:id="@+id/RateLL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ReviewTextTL"
         android:layout_marginTop="26dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ReviewTextTL">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rate"
-            android:textSize="24sp"
-            android:textColor="@color/black"
+            android:layout_marginRight="13dp"
             android:fontFamily="@font/raleway_bold"
-            android:layout_marginRight="13dp"/>
-        
+            android:text="Rate"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
         <ImageView
             android:id="@+id/Star1Btn"
             android:layout_width="29dp"
             android:layout_height="25dp"
-            android:src="@drawable/star"
-            android:layout_marginRight="6dp"/>
+            android:layout_marginRight="6dp"
+            android:src="@drawable/star_outlined" />
 
         <ImageView
             android:id="@+id/Star2Btn"
             android:layout_width="29dp"
             android:layout_height="25dp"
-            android:src="@drawable/star"
-            android:layout_marginRight="6dp"/>
+            android:layout_marginRight="6dp"
+            android:src="@drawable/star_outlined" />
 
         <ImageView
             android:id="@+id/Star3Btn"
             android:layout_width="29dp"
             android:layout_height="25dp"
-            android:src="@drawable/star"
-            android:layout_marginRight="6dp"/>
+            android:layout_marginRight="6dp"
+            android:src="@drawable/star_outlined" />
 
         <ImageView
             android:id="@+id/Star4Btn"
             android:layout_width="29dp"
             android:layout_height="25dp"
-            android:src="@drawable/star"
-            android:layout_marginRight="6dp"/>
+            android:layout_marginRight="6dp"
+            android:src="@drawable/star_outlined" />
 
         <ImageView
             android:id="@+id/Star5Btn"
             android:layout_width="29dp"
             android:layout_height="25dp"
-            android:src="@drawable/star"
-            android:layout_marginRight="6dp"/>
+            android:layout_marginRight="6dp"
+            android:src="@drawable/star_outlined" />
 
     </LinearLayout>
 
     <CheckBox
+        android:id="@+id/anonymousCB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/RateLL"
-        android:text="Send as Anonymous"
+        android:checked="false"
         android:fontFamily="@font/raleway_medium"
-        android:textSize="20sp"
-        android:paddingBottom="5dp"
         android:paddingLeft="5dp"
+        android:paddingBottom="5dp"
+        android:text="Send as Anonymous"
         android:textColor="@color/black"
-        android:checked="true"/>
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/RateLL" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/SubmitBtn"
         android:layout_width="271dp"
         android:layout_height="61dp"
+        android:backgroundTint="@android:color/transparent"
+        android:fontFamily="@font/raleway_bold"
         android:paddingTop="0dp"
+        android:text="Submit"
+        android:textColor="#3E3E3E"
         android:textSize="16sp"
         app:cornerRadius="10dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/gray4"
-        android:backgroundTint="@android:color/transparent"
-        android:textColor="#3E3E3E"
-        android:text="Submit"
-        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintBottom_toTopOf="@id/CancelBtn"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/CancelBtn"/>
+        app:strokeColor="@color/gray4"
+        app:strokeWidth="1dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/CancelBtn"
         android:layout_width="271dp"
         android:layout_height="61dp"
+        android:backgroundTint="@android:color/transparent"
+        android:fontFamily="@font/raleway_bold"
         android:paddingTop="0dp"
+        android:text="Cancel"
+        android:textColor="#3E3E3E"
         android:textSize="16sp"
         app:cornerRadius="10dp"
-        android:backgroundTint="@android:color/transparent"
-        android:textColor="#3E3E3E"
-        android:text="Cancel"
-        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

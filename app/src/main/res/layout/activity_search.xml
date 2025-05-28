@@ -65,6 +65,7 @@
 
 
     <TextView
+        android:id="@+id/noSalonsTV"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_medium"
@@ -78,6 +79,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

@@ -43,6 +43,10 @@
         <activity android:name=".ChangePasswordActivity" android:exported="false"/>
         <activity android:name=".BookSelectSlotActivity" android:exported="false"/>
         <activity android:name=".BookingCompleteActivity" android:exported="false"/>
+        <activity android:name=".AddCardActivity" android:exported="false"/>
+        <activity android:name=".SalonDetailsActivity" android:exported="false"/>
+        <activity android:name=".SalonReviewsActivity" android:exported="false"/>
+        <activity android:name=".SalonCreateReviewActivity" android:exported="false"/>
 
         <meta-data
             android:name="preloaded_fonts"

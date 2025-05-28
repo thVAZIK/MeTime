@@ -1,80 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_margin="20dp">
+
     <TextView
         android:id="@+id/MeTimeSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_bold"
         android:text="Reviews"
         android:textSize="19sp"
-        android:fontFamily="@font/raleway_bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/BackBtn"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/arrow_left"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/BackBtn"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/ReviewsSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Customer reviews for"
+        android:layout_marginTop="29dp"
         android:fontFamily="@font/raleway_bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/MeTimeSign"
-        android:textSize="18sp"
+        android:text="Customer reviews for"
         android:textColor="@color/black"
-        android:layout_marginTop="29dp"/>
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MeTimeSign" />
 
     <TextView
         android:id="@+id/SalonNameTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The Gallery Salon"
         android:fontFamily="@font/raleway_bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ReviewsSign"
+        android:text="The Gallery Salon"
         android:textColor="@color/black"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ReviewsSign" />
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layout_constraintHeight_max="650dp"
-        tools:listitem="@layout/item_review"
         android:id="@+id/ReviewsRV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="650dp"
+        android:layout_marginTop="14dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/SalonNameTV"
-        android:layout_marginTop="14dp"/>
+        tools:listitem="@layout/item_review" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/WriteReviewBtn"
         android:layout_width="271dp"
         android:layout_height="61dp"
+        android:backgroundTint="@android:color/transparent"
+        android:fontFamily="@font/raleway_bold"
         android:paddingTop="0dp"
+        android:text="Write a review"
+        android:textColor="#3E3E3E"
         android:textSize="16sp"
         app:cornerRadius="10dp"
-        app:strokeWidth="1dp"
-        app:strokeColor="@color/gray4"
-        android:backgroundTint="@android:color/transparent"
-        android:textColor="#3E3E3E"
-        android:text="Write a review"
-        android:fontFamily="@font/raleway_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:strokeColor="@color/gray4"
+        app:strokeWidth="1dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,8 +7,12 @@ import androidx.annotation.NonNull;
 import com.example.metime.Models.Appointment;
 import com.example.metime.Models.AppointmentInsert;
 import com.example.metime.Models.AppointmentStatusUpdate;
+import com.example.metime.Models.ChatCreateRequest;
 import com.example.metime.Models.LoginRequest;
+import com.example.metime.Models.MessageCreateRequest;
+import com.example.metime.Models.PaymentMethodCreateRequest;
 import com.example.metime.Models.ProfileUpdate;
+import com.example.metime.Models.SalonReviewCreateRequest;
 import com.example.metime.Models.UserUpdateRequest;
 import com.example.metime.Models.VerifyRequest;
 import com.google.gson.Gson;
@@ -345,7 +349,7 @@ public class ApiClient {
 
     public void fetchAllActiveBanners(final SBC_Callback callback) {
         Request request = new Request.Builder()
-                .url(DOMAIN_NAME + REST_PATH + "Banners?select=*&is_active=eq.true")
+                .url(DOMAIN_NAME + REST_PATH + "Banners?select=*")
                 .addHeader("apikey", API_KEY)
                 .addHeader("Authorization", DataBinding.getBearerToken())
                 .build();
@@ -434,6 +438,299 @@ public class ApiClient {
                 .addHeader("Authorization", DataBinding.getBearerToken())
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Prefer", "return=minimal")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void fetchAllPaymentMethods(final SBC_Callback callback) {
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Payment_Methods?select=*")
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void createPaymentMethod(PaymentMethodCreateRequest paymentMethod, final SBC_Callback callback) {
+        MediaType mediaType = MediaType.parse("application/json");
+        Gson gson = new Gson();
+        String json = gson.toJson(paymentMethod);
+        RequestBody body = RequestBody.create(json, mediaType);
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Payment_Methods")
+                .method("POST", body)
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Prefer", "return=minimal")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void deletePaymentMethod(String paymentMethodId, final SBC_Callback callback) {
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Payment_Methods?payment_method_id=eq." + paymentMethodId)
+                .method("DELETE", null)
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void fetchAllChats(final SBC_Callback callback) {
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Chats?select=*")
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void fetchAllMessages(final SBC_Callback callback) {
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Messages?select=*")
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void createChat(ChatCreateRequest chat, final SBC_Callback callback) {
+        MediaType mediaType = MediaType.parse("application/json");
+        Gson gson = new Gson();
+        String json = gson.toJson(chat);
+        RequestBody body = RequestBody.create(json, mediaType);
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Chats")
+                .method("POST", body)
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Prefer", "return=minimal")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void createMessage(MessageCreateRequest message, final SBC_Callback callback) {
+        MediaType mediaType = MediaType.parse("application/json");
+        Gson gson = new Gson();
+        String json = gson.toJson(message);
+        RequestBody body = RequestBody.create(json, mediaType);
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Messages")
+                .method("POST", body)
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Prefer", "return=minimal")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void fetchAllSalons(final SBC_Callback callback) {
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Salons?select=*,Salons_Ratings_Summary(*),Coupons(*)")
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void fetchSalonReviews(int salonId, final SBC_Callback callback) {
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Salon_Reviews?select=*,profiles(*)&salon_id=eq." + salonId)
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void createSalonReview(SalonReviewCreateRequest review, final SBC_Callback callback) {
+        MediaType mediaType = MediaType.parse("application/json");
+        Gson gson = new Gson();
+        String json = gson.toJson(review);
+        RequestBody body = RequestBody.create(json, mediaType);
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Salon_Reviews")
+                .method("POST", body)
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
+                .addHeader("Content-Type", "application/json")
+                .addHeader("Prefer", "return=minimal")
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                String responseBody = response.body().string();
+                if (response.isSuccessful()) {
+                    callback.onResponse(responseBody);
+                } else {
+                    callback.onError(responseBody);
+                }
+            }
+        });
+    }
+
+    public void fetchSalonById(int salonId, final SBC_Callback callback) {
+        Request request = new Request.Builder()
+                .url(DOMAIN_NAME + REST_PATH + "Salons?select=*,Salons_Ratings_Summary(*),Coupons(*)&salon_id=eq." + salonId)
+                .addHeader("apikey", API_KEY)
+                .addHeader("Authorization", DataBinding.getBearerToken())
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override

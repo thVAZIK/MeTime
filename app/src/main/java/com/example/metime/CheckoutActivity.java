@@ -10,18 +10,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.example.metime.Fragments.AddPaymentMethodFragment;
-import com.example.metime.Models.Appointment;
 import com.example.metime.Models.AppointmentInsert;
+import com.example.metime.Models.PaymentMethod;
 import com.example.metime.Tools.ApiClient;
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class CheckoutActivity extends AppCompatActivity {
@@ -32,10 +37,11 @@ public class CheckoutActivity extends AppCompatActivity {
     private TextView PaymentMethodTV;
     private int serviceId, serviceDuration, calendarId, salonId;
     private String serviceName, masterId, masterName, userId, salonAddress;
-    private double servicePrice;
+    private int servicePrice;
     private long appointmentTimeMillis;
     private static final String PREFS_NAME = "MeTimePrefs";
     private static final String KEY_USER_ID = "user_id";
+    private ActivityResultLauncher<Intent> paymentMethodLauncher;
 
     private void init() {
         PaymentMethodLL = findViewById(R.id.PaymentMethodLL);
@@ -61,7 +67,7 @@ public class CheckoutActivity extends AppCompatActivity {
         Intent intent = getIntent();
         serviceId = intent.getIntExtra("service_id", -1);
         serviceName = intent.getStringExtra("service_name");
-        servicePrice = intent.getDoubleExtra("service_price", 0.0);
+        servicePrice = intent.getIntExtra("service_price", 0);
         serviceDuration = intent.getIntExtra("service_duration", 0);
         masterId = intent.getStringExtra("master_id");
         masterName = intent.getStringExtra("master_name");
@@ -75,9 +81,19 @@ public class CheckoutActivity extends AppCompatActivity {
         AppointmentDateTV.setText(dateTimeFormat.format(new Date(appointmentTimeMillis)));
         ServiceWithMasterFNTV.setText(String.format("%s with %s", serviceName, masterName));
         LocationTV.setText(salonAddress != null && !salonAddress.isEmpty() ? salonAddress : "Unknown Address");
-        TotalTV.setText(String.format("$%.2f", servicePrice));
+        TotalTV.setText("$" + servicePrice);
         PaymentMethodTV.setText("None");
         PaymentMethodImageIV.setVisibility(View.GONE);
+
+        // Initialize ActivityResultLauncher
+        paymentMethodLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) {
+                        fetchPaymentMethods(); // Refresh payment methods
+                    }
+                }
+        );
 
         // Listeners
         BackBtn.setOnClickListener(v -> finish());
@@ -86,6 +102,9 @@ public class CheckoutActivity extends AppCompatActivity {
             fragment.show(getSupportFragmentManager(), "AddPaymentMethodFragment");
         });
         BookBtn.setOnClickListener(v -> confirmBooking());
+
+        // Fetch payment methods
+        fetchPaymentMethods();
     }
 
     @Override
@@ -101,12 +120,68 @@ public class CheckoutActivity extends AppCompatActivity {
         init();
     }
 
+    public void fetchPaymentMethods() {
+        ApiClient api = new ApiClient(this);
+        api.fetchAllPaymentMethods(new ApiClient.SBC_Callback() {
+            @Override
+            public void onFailure(IOException e) {
+                runOnUiThread(() -> {
+                    Log.e("fetchPaymentMethods", e.getMessage());
+                    Toast.makeText(CheckoutActivity.this, "Failed to fetch payment methods", Toast.LENGTH_SHORT).show();
+                    updatePaymentMethodUI(null);
+                });
+            }
+
+            @Override
+            public void onError(String errorBody) {
+                runOnUiThread(() -> {
+                    Log.e("fetchPaymentMethods", errorBody);
+                    Toast.makeText(CheckoutActivity.this, "Error fetching payment methods", Toast.LENGTH_SHORT).show();
+                    updatePaymentMethodUI(null);
+                });
+            }
+
+            @Override
+            public void onResponse(String responseBody) {
+                runOnUiThread(() -> {
+                    Log.d("fetchPaymentMethods", responseBody);
+                    Gson gson = new Gson();
+                    TypeToken<List<PaymentMethod>> typeToken = new TypeToken<List<PaymentMethod>>() {};
+                    List<PaymentMethod> paymentMethods = gson.fromJson(responseBody, typeToken.getType());
+                    PaymentMethod cardMethod = null;
+                    for (PaymentMethod method : paymentMethods) {
+                        if (method.getType() == 4) {
+                            cardMethod = method;
+                            break;
+                        }
+                    }
+                    updatePaymentMethodUI(cardMethod);
+                });
+            }
+        });
+    }
+
+    private void updatePaymentMethodUI(PaymentMethod cardMethod) {
+        if (cardMethod != null && cardMethod.getDetails() != null) {
+            String cardNumber = cardMethod.getDetails().getCard_number();
+            if (cardNumber != null && cardNumber.length() >= 8) {
+                String lastEight = cardNumber.substring(cardNumber.length() - 8);
+                String formatted = "**** " + lastEight.substring(4);
+                PaymentMethodTV.setText(formatted);
+                PaymentMethodImageIV.setImageResource(R.drawable.credit_card);
+                PaymentMethodImageIV.setVisibility(View.VISIBLE);
+            } else {
+                PaymentMethodTV.setText("None");
+                PaymentMethodImageIV.setVisibility(View.GONE);
+            }
+        } else {
+            PaymentMethodTV.setText("None");
+            PaymentMethodImageIV.setVisibility(View.GONE);
+        }
+    }
+
     private void confirmBooking() {
-        // For testing, bypass payment method check
-        // if (PaymentMethodTV.getText().toString().equals("None")) {
-        //     Toast.makeText(this, "Please select a payment method", Toast.LENGTH_SHORT).show();
-        //     return;
-        // }
+        // Bypassing payment method check for testing
         createAppointment();
     }
 
@@ -124,7 +199,6 @@ public class CheckoutActivity extends AppCompatActivity {
             return;
         }
 
-        // Create Appointment object
         AppointmentInsert appointment = new AppointmentInsert(
                 userId,
                 masterId,
@@ -166,14 +240,5 @@ public class CheckoutActivity extends AppCompatActivity {
                 });
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 200 && resultCode == RESULT_OK) {
-            setResult(RESULT_OK);
-            finish();
-        }
     }
 }

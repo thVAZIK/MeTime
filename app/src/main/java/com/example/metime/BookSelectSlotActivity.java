@@ -51,7 +51,7 @@ public class BookSelectSlotActivity extends AppCompatActivity {
     private TimeSlotItem selectedTimeSlot;
     private int serviceId, serviceDuration, salonId;
     private String serviceName, salonAddress;
-    private double servicePrice;
+    private int servicePrice;
     private String serviceImageLink;
 
     private void init() {
@@ -71,7 +71,7 @@ public class BookSelectSlotActivity extends AppCompatActivity {
         Intent intent = getIntent();
         serviceId = intent.getIntExtra("service_id", -1);
         serviceName = intent.getStringExtra("service_name");
-        servicePrice = intent.getDoubleExtra("service_price", 0.0);
+        servicePrice = intent.getIntExtra("service_price", 0);
         serviceDuration = intent.getIntExtra("service_duration", 0);
         serviceImageLink = intent.getStringExtra("service_image_link");
         salonId = intent.getIntExtra("salon_id", -1);
@@ -287,6 +287,7 @@ public class BookSelectSlotActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this, CheckoutActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("service_id", serviceId);
         intent.putExtra("service_name", serviceName);
         intent.putExtra("service_price", servicePrice);
