@@ -5,7 +5,7 @@ This application, **MeTime**, is being developed as part of a college practicum.
 
 ## Development Tasks
 - [x] Develop all application windows (UI)
-- [ ] Implement core functionality
+- [x] Implement core functionality
 - [x] Add user authentication and profile management
 - [ ] Finding and fixing bugs
 - [ ] Final refactoring
