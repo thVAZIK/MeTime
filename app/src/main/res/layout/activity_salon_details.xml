@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/raleway_bold"
-        android:text="MeTime"
+        android:text="@string/metime"
         android:textSize="19sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_semibold"
-                android:text="Call"
+                android:text="@string/call"
                 android:textColor="@color/gray3" />
         </LinearLayout>
 
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_semibold"
-                android:text="Message"
+                android:text="@string/message"
                 android:textColor="@color/gray3" />
         </LinearLayout>
 
@@ -163,7 +163,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_semibold"
-                android:text="Directions"
+                android:text="@string/directions"
                 android:textColor="@color/gray3" />
         </LinearLayout>
 
@@ -192,7 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_semibold"
-                android:text="Share"
+                android:text="@string/share"
                 android:textColor="@color/gray3" />
         </LinearLayout>
 
@@ -236,7 +236,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/raleway_bold"
-        android:text="Customer reviews"
+        android:text="@string/customer_reviews"
         android:textColor="@color/gray3"
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -530,7 +530,7 @@
         app:cornerRadius="10dp"
         android:backgroundTint="@android:color/transparent"
         android:textColor="#505050"
-        android:text="See all reviews"
+        android:text="@string/see_all_reviews"
         android:layout_marginBottom="30dp"
         android:fontFamily="@font/raleway_bold"
         app:layout_constraintLeft_toLeftOf="parent"

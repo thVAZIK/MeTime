@@ -1,12 +1,112 @@
 <resources>
-    <string name="app_name">MeTime</string>
+    <string name="app_name" translatable="false">MeTime</string>
     <string name="log_out"><u>Log out</u></string>
-    <string name="follow_the_steps_to_schedule_your_nex_appointment_with_us">Follow the steps to schedule your nex appointment with us.</string>
+    <string name="follow_the_steps_to_schedule_your_nex_appointment_with_us">Follow the steps to schedule your next appointment with us.</string>
     <string name="i_don_t_have_a_preference"><u>I don\'t have a preference</u></string>
     <string name="before_schedule_please_enter_your_account_or_create_one">Before schedule, please enter your account or create one!</string>
-    <string name="select_date_amp_time"><![CDATA[Select date & time]]></string>
+    <string name="select_date_amp_time" translatable="false"><![CDATA[Select date & time]]></string>
     <string name="select_a_date_to_see_the_next_slot_available_for_you">Select a date to see the <font color="#FDCCC5">next</font> slot available for you</string>
     <string name="thank_you_for_booking_with_metime">Thank you for booking with <font face="raleway_bold" color="#FF000000">MeTime</font></string>
     <string name="are_you_sure_you_want_to_cancel_this_appointment">Are you sure, you want to <font color="#ED7354">cancel</font> this appointment?</string>
-    <string name="review_text_example">Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque.</string>
+    <string name="review_text_example" translatable="false">Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque.</string>
+    <string name="checkout">Checkout</string>
+    <string name="add_card">Add Card</string>
+    <string name="cardholder_name">Cardholder name</string>
+    <string name="type_cardholder_full_name">Type cardholder full name</string>
+    <string name="card_number">Card number</string>
+    <string name="type_your_card_number">Type your card number</string>
+    <string name="exp_date">Exp. Date</string>
+    <string name="mm_yy">MM/YY</string>
+    <string name="cvv" translatable="false">CVV</string>
+    <string name="cvv_code">CVV code</string>
+    <string name="your_booking_details">Your booking details:</string>
+    <string name="keep_booking">Keep booking</string>
+    <string name="main_page">Main page</string>
+    <string name="booking">Booking</string>
+    <string name="day">Day</string>
+    <string name="availability">Availability</string>
+    <string name="book">Book</string>
+    <string name="bookings">Bookings</string>
+    <string name="your_bookings">Your Bookings</string>
+    <string name="change_password">Change password</string>
+    <string name="current_password">Current password</string>
+    <string name="enter_your_current_password">Enter your current password</string>
+    <string name="new_password">New password</string>
+    <string name="enter_your_new_password">Enter your new password</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="enter_your_new_password_again">Enter your new password again</string>
+    <string name="cancel">Cancel</string>
+    <string name="save_password">Save password</string>
+    <string name="please_check_the_details_and_confirm_your_appointment">Please check the details and confirm your appointment</string>
+    <string name="date">Date</string>
+    <string name="service">Service</string>
+    <string name="location">Location</string>
+    <string name="payment">Payment</string>
+    <string name="total">Total</string>
+    <string name="see_all_reviews">See all reviews</string>
+    <string name="now_choose_one_that_fit_your_needs">Now, choose one that fit your needs</string>
+    <string name="choose_a_professional_see_the_slots_available">Choose a professional, see the slots available</string>
+    <string name="metime" translatable="false">MeTime</string>
+    <string name="please_choose_a_service">Please, choose a service:</string>
+    <string name="skip">Skip</string>
+    <string name="editing_profile">Editing Profile</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="save_changes">Save changes</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="start">Start</string>
+    <string name="enter_code">Enter code</string>
+    <string name="we_ve_sent_an_email_message_with_an_activation_code_to_your_email">We\'ve sent an Email message with an activation code to your email</string>
+    <string name="send_code_again">Send code again</string>
+    <string name="enter_pin_code">Enter PIN-code</string>
+    <string name="forget_pin_code">Forget PIN-code?</string>
+    <string name="log_in">Log in</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="password">Password</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="continue_r">Continue</string>
+    <string name="doesn_t_have_account">Doesn\'t have account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="hello">Hello,</string>
+    <string name="search">Search</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="you_don_t_have_any_appointment_yet">You don\'t have any appointment yet</string>
+    <string name="services">Services</string>
+    <string name="reviews">Reviews</string>
+    <string name="my_profile">My Profile</string>
+    <string name="loading">Loading...</string>
+    <string name="change_profile_data">Change profile data...</string>
+    <string name="change_password_three_dots">Change password...</string>
+    <string name="log_out_three_dots">Log out...</string>
+    <string name="type_your_review_here">Type your review here</string>
+    <string name="rate">Rate</string>
+    <string name="send_as_anonymous">Send as Anonymous</string>
+    <string name="submit">Submit</string>
+    <string name="call">Call</string>
+    <string name="message">Message</string>
+    <string name="directions">Directions</string>
+    <string name="share">Share</string>
+    <string name="customer_reviews">Customer reviews</string>
+    <string name="customer_reviews_for">Customer reviews for</string>
+    <string name="write_a_review">Write a review</string>
+    <string name="type_to_search">Type to search</string>
+    <string name="no_salons_found">No salons found</string>
+    <string name="setup_pin_code">Setup PIN-code</string>
+    <string name="full_name">Full Name</string>
+    <string name="enter_your_full_name">Enter your full name</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="support">Support</string>
+    <string name="write_message_here">Write message here...</string>
+    <string name="add_payment_method">Add payment method</string>
+    <string name="cash">Cash</string>
+    <string name="card">Card</string>
+    <string name="remove">Remove</string>
+    <string name="hey_there">Hey there!</string>
+    <string name="create_account">Create Account</string>
+    <string name="navigation">Navigation</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="no">No</string>
 </resources>

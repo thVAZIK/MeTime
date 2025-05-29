@@ -41,7 +41,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="-7dp"
                 android:fontFamily="@font/raleway_medium"
-                android:text="Navigation"
+                android:text="@string/navigation"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 app:layout_constraintLeft_toRightOf="@id/MenuBtn"
@@ -75,7 +75,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="-3dp"
                         android:fontFamily="@font/raleway_medium"
-                        android:text="Home"
+                        android:text="@string/home"
                         android:textColor="@color/nav_menu_selected"
                         android:textSize="24sp" />
                 </LinearLayout>
@@ -107,7 +107,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="-3dp"
                         android:fontFamily="@font/raleway_medium"
-                        android:text="Profile"
+                        android:text="@string/profile"
                         android:textColor="@color/white"
                         android:textSize="24sp" />
                 </LinearLayout>
@@ -132,7 +132,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="-3dp"
                         android:fontFamily="@font/raleway_medium"
-                        android:text="Bookings"
+                        android:text="@string/bookings"
                         android:textColor="@color/white"
                         android:textSize="24sp" />
                 </LinearLayout>
@@ -157,7 +157,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="-3dp"
                         android:fontFamily="@font/raleway_medium"
-                        android:text="Support"
+                        android:text="@string/support"
                         android:textColor="@color/white"
                         android:textSize="24sp" />
                 </LinearLayout>

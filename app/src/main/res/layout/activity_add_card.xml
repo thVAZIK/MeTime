@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_bold"
-        android:text="Checkout"
+        android:text="@string/checkout"
         android:textSize="19sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -33,7 +33,7 @@
         android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/MeTimeSign"
-        android:text="Add Card"
+        android:text="@string/add_card"
         android:textSize="32sp"
         android:layout_marginTop="60dp"/>
 
@@ -43,7 +43,7 @@
         android:id="@+id/CardholderSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cardholder name"
+        android:text="@string/cardholder_name"
         android:fontFamily="@font/raleway_medium"
         app:layout_constraintTop_toBottomOf="@id/AddCardSign"
         app:layout_constraintStart_toStartOf="@id/CardHolderTL"
@@ -67,7 +67,7 @@
             android:fontFamily="@font/raleway_semibold"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:hint="Type cardholder full name"
+            android:hint="@string/type_cardholder_full_name"
             android:inputType="text"
             android:padding="12dp"
             android:textColorHint="@color/grayHint" />
@@ -80,7 +80,7 @@
         android:id="@+id/CardNumberSign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Card number"
+        android:text="@string/card_number"
         android:fontFamily="@font/raleway_medium"
         app:layout_constraintTop_toBottomOf="@id/CardHolderTL"
         app:layout_constraintStart_toStartOf="@id/CardHolderTL"
@@ -104,7 +104,7 @@
             android:fontFamily="@font/raleway_semibold"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:hint="Type your card number"
+            android:hint="@string/type_your_card_number"
             android:inputType="number"
             android:padding="12dp"
             android:textColorHint="@color/grayHint" />
@@ -134,7 +134,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/raleway_medium"
-                android:text="Exp. Date"
+                android:text="@string/exp_date"
                 android:textColor="@color/gray2"
                 android:textSize="16sp" />
 
@@ -154,7 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:fontFamily="@font/raleway_semibold"
-                    android:hint="MM/YY"
+                    android:hint="@string/mm_yy"
                     android:inputType="text"
                     android:padding="12dp"
                     android:textColorHint="@color/grayHint" />
@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/raleway_medium"
-                android:text="CVV"
+                android:text="@string/cvv"
                 android:textColor="@color/gray2"
                 android:textSize="16sp"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -197,7 +197,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:fontFamily="@font/raleway_semibold"
-                    android:hint="CVV code"
+                    android:hint="@string/cvv_code"
                     android:inputType="number"
                     android:padding="12dp"
                     android:textColorHint="@color/grayHint" />
@@ -216,7 +216,7 @@
         app:cornerRadius="10dp"
         android:backgroundTint="@color/primary"
         android:textColor="@color/white"
-        android:text="Add Card"
+        android:text="@string/add_card"
         android:fontFamily="@font/raleway_bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

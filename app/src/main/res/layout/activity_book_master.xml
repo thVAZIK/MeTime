@@ -90,7 +90,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/MasterRatingLL"
-        android:text="See all reviews"
+        android:text="@string/see_all_reviews"
         android:fontFamily="@font/raleway_bold"
         android:textSize="14sp"
         android:layout_marginTop="5dp"/>
